@@ -1,70 +1,40 @@
-# Nimbo — js13kGames 2026
+# Nimbo — release guide
 
-Stack clouds into a staircase and help a little unicorn escape the rising fog.
-The standalone competition game is in `js13k/src/`. The home preview plays that
-exact packed entry; the Original studio button opens the earlier Three.js version.
+Nimbo is a standalone 13KB cloud-stacking game. The competition build is the main game.
 
-## Reproduce
+## Build and play
 
-Use Node.js 24 or newer and the committed lockfile. Verification used Node.js
-26.8.1; use that version for byte-identical release reproduction.
+Use Node 26.8.1 for byte-identical release reproduction (Node 24+ is required).
 
 ```sh
 npm ci --ignore-scripts
-npm run test:game
-npm run pack:js13k
+npm test
 npm run typecheck
 npm run build
-sh startup.sh
+npm run dev
 ```
 
-`public/nimbo.zip` is the competition package. Its single root `index.html`
-contains all runtime JavaScript, geometry, UI, sound and styles. `public/entry/`
-is the identical unpacked preview. The app wrapper, studio, share cards and
-platform scripts are not part of the competition ZIP.
+Open http://localhost:8080. `npm run typecheck` checks JavaScript syntax; there is no TypeScript source in the cleaned repository. Gameplay regressions run separately through `npm test`.
 
-The packer applies Terser and a seeded Roadroller search, then keeps the smallest standard DEFLATE
-ZIP. It exits unsuccessfully above 13,312 bytes. No server, database, accounts,
-network assets or audio downloads are required by the entry.
+- `js13k/src/`: readable game, WebGL renderer, procedural models, music and interface.
+- `public/nimbo.zip`: competition upload; single root `index.html`, no runtime dependencies.
+- `public/entry/index.html`: identical unpacked game.
+- `public/press/`: presentation scenes and media, excluded from the ZIP.
+- `scripts/`: packing, static server, checks and repeatable QA.
+- `workfiles/`: cumulative audit and submission evidence.
 
-## Controls
+The packer uses pinned Terser/Roadroller versions and a fixed packing seed. It fails above 13,312 bytes. `node scripts/press-scenes.mjs` regenerates staged promotional scenes from the actual game models; these are explicitly not ordinary gameplay captures.
 
-A/D or arrows move. W/X/up rotates clockwise; Q/Z rotates counterclockwise.
-S/down soft drops; Space hard drops. P/Escape pauses, M toggles sound.
-Touch controls provide move, rotate, soft/hard drop. Tap the board to rotate,
-swipe horizontally to nudge, or swipe down to drop.
+## Rules and controls
 
-Nimbo hops up at most two cells and across one on a 14-column board. Five matching
-clouds horizontally or vertically clear and ease the fog. Full rows instead become
-fixed rainbow platforms, immune to matches and gravity. Land on one to save an
-in-memory checkpoint; after death choose Retry checkpoint or New game. Reloading
-does not retain checkpoints. A retry restores the saved board, fog and queued
-pieces, with the active piece raised to its spawn height. Height remains the score.
+Build on a 14-column board. Nimbo automatically climbs one cell across and up to two cells higher. Five or more consecutive clouds of one color clear horizontally or vertically. Full rows instead become permanent glowing rainbow platforms and take priority over matches. Reach a platform to activate a checkpoint. Retry restores that snapshot; New game starts over. Checkpoints expire on reload. The rising fog and falling player pieces can kill Nimbo; a red drop outline warns of crushing. Compaction cannot crush her. One prism per seven-piece bag pushes fog back.
 
-Falling player pieces can crush Nimbo; the red drop outline warns of an impact
-at her current position. Clouds compacting after matches cannot crush her. The
-fog remains lethal. Each bag contains all seven tetrominoes and one rainbow piece.
-Checkpoint color, emission and shimmer are procedural WebGL shader effects;
-reduced-motion uses a static glow. The camera shows the complete board and at
-least 20 usable rows on desktop.
+A/D or arrows move; W/X/up rotates; Q/Z reverses rotation. S/down soft drops, Space hard drops, P/Escape pauses, M toggles sound. Mobile has touch controls and board gestures. Best scores and sound preferences use localStorage.
 
-For repeatable QA, `node scripts/nimbo-preview.mjs` validates and serves the ZIP
-at port 8082. `/scenarios` serves a separate readable-source fixture with visible
-buttons for completing a checkpoint, aiming a piece at Nimbo and a clear chain.
-Fixture controls are not present in the competition ZIP.
+## QA and archive
 
-## Credits and provenance
+`npm run qa:zip` serves the validated ZIP on 8082. `/scenarios` provides separate source fixtures for checkpoint, crush and clear-chain checks. `node scripts/nimbo-firefox.mjs` runs Firefox checks while that server is running. Physical phones and OS focus switching remain outside recorded coverage.
 
-The compact WebGL renderer is adapted from the public-domain W family by xem:
-https://github.com/xem/W/tree/3834c32bddc7c66fdb465fa94af07dd5d75d3f3b
-The upstream README explicitly declares public domain. Nimbo's readable renderer,
-models, gameplay and synthesized music are included in `js13k/src/game.js`.
-Build tools and the optional studio retain their respective dependency licences.
-AI assistance was used for the audit, implementation and verification.
+The former Three.js studio and app-builder framework remain in Git history through `e979a3d`. A local ignored backup is retained in `workfiles/local-platform/`; they are not dependencies of this entry.
 
-Author credit and competition-period eligibility require the owner's confirmation
-before submission. No additional licence grant for original project content is
-implied by publishing readable source.
-
-See `workfiles/audit.md`, `workfiles/agent-browser/playbook.md` and the release JSON
-files for measured verification. Competition-site saving and acceptance are deferred at the owner's request.
+Renderer provenance: [xem/W, public domain](https://github.com/xem/W/tree/3834c32bddc7c66fdb465fa94af07dd5d75d3f3b). Original project content has no additional licence grant implied. AI assistance was used. Confirm author credit and creation-period eligibility before final contest submission.

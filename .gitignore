@@ -17,3 +17,9 @@ workfiles/browsers/
 workfiles/release/unpacked/
 workfiles/release/*-smoke.txt
 workfiles/release/*-tests.txt
+
+workfiles/local-platform/
+public/press/cover.html
+public/press/checkpoint.html
+public/press/thumbnail.html
+workfiles/release/clean/

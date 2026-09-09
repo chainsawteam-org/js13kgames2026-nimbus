@@ -87,3 +87,10 @@
 - Final typecheck/build and desktop/mobile dev/built smoke checks pass. Production, preview and extracted entry share SHA-256 99b5a78dc7d699b090e877cf61cb03ac1cafa49e934b121334c71253dd42214c.
 
 - Final exact-ZIP in-app play completed: 958 conservative active seconds (15m58s), repeated real-time UI-controlled runs, menus/pauses and previous candidates excluded. Final console warnings/errors: none. Explicit pause and sound toggle verified. Events and method are in release/in-app-play.json checkpointRelease; screenshot checkpoint-final-in-app.png. Rare checkpoint/chain cases were exercised in separate source fixtures. Physical mobile devices and an OS-level focus switch were not verified; focus/input-release behavior is covered by regression tests.
+
+## Checkpoint 10 — game-only repository and listing media
+- Owner requested repository cleanup, game-only distribution, presentation scenes/images and competition listing preparation via Computer Use. Removed the unrelated app-builder/studio/auth/database framework from tracked source; retained ignored local backup in workfiles/local-platform and historical commit e979a3d. No gameplay changes.
+- Package now contains three pinned development dependencies and 16 lockfile package records. Plain Node static preview, game tests, syntax checks and original packer retained. 28 tests pass; ZIP reproduces the previously played 13095-byte hash exactly.
+- Promotional scenes use actual game geometry and are labelled staged; desktop/mobile captures use the competition game.
+- Task exceeded the local 4000-token budget; no new game mechanics or competition eligibility facts were invented.
+- Clean-room npm ci installed 15 packages, audit found zero vulnerabilities; rebuild reproduces the exact ZIP hash. Dependencies dropped from488 to16 lock records. New static server game rendering/input verified desktop/mobile with a fresh Chrome session and empty error log. The first stale title click was retried after viewport/snapshot refresh; final click succeeded.

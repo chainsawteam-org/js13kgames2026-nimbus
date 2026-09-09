@@ -42,3 +42,19 @@ Status: site saving and submission deferred by the owner. No organizer acceptanc
 - Signed-in competition draft uploaded and hosted play verified.
 - Owner approves competition terms and final submission at action time.
 - Organizer review recorded independently of technical readiness.
+
+## Listing media prepared
+
+- Cover: public/press/cover.png (1600x900, staged promotional scene).
+- Thumbnail: public/press/thumbnail.png (400x400, promotional artwork).
+- Checkpoint: public/press/checkpoint.png (1600x900, staged promotional scene).
+- Actual gameplay: public/press/gameplay-desktop.png (1280x800), gameplay-mobile.png (390x844).
+- Preview gallery: public/press/index.html.
+- Current source: https://github.com/chainsawteam-org/js13kgames2026-nimbus/tree/competition-2026
+- Archive: public/nimbo.zip, 13095 bytes; SHA-256 12b36857d4658d15b1d768840737b5c411a1679ace42274d556ecb53550f4db3.
+
+Short description: Build rainbow cloud stairs, save glowing checkpoints, and guide a tiny unicorn above the fog.
+
+Platform: Web / HTML5 / WebGL2. Single player. Desktop keyboard and mobile touch. Offline after loading; no external runtime resources.
+
+Computer Use reached the registration page, but currently returns an empty accessibility tree and no screenshot. No fields or upload success have been claimed. Image dimension requirements must be confirmed against the readable form before uploading.
