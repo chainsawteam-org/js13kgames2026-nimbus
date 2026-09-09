@@ -6,7 +6,7 @@ Build a staircase of rainbow clouds for Nimbo, who climbs by herself while the f
 
 [Play Nimbo on js13kGames](https://js13kgames.com/games/nimbo#play) · [Download the game ZIP](https://raw.githubusercontent.com/chainsawteam-org/js13kgames2026-nimbus/competition-2026/public/nimbo.zip) · [Development post-mortem](workfiles/release/post-mortem.md)
 
-![Nimbo above a rainbow staircase](https://raw.githubusercontent.com/chainsawteam-org/js13kgames2026-nimbus/competition-2026/public/press/cover.png)
+![Nimbo above a rainbow staircase](https://raw.githubusercontent.com/chainsawteam-org/js13kgames2026-nimbus/competition-2026/public/press/cover.png?v=424e3d0)
 
 *Promotional scene rendered with the actual procedural game models. [View the cover file](public/press/cover.png).*
 
@@ -24,19 +24,19 @@ All models, rainbow shaders, sparkles and music are generated procedurally. The 
 
 ### Desktop gameplay
 
-![Desktop gameplay with the landing warning and upcoming pieces](https://raw.githubusercontent.com/chainsawteam-org/js13kgames2026-nimbus/competition-2026/public/press/gameplay-desktop.png)
+![Desktop gameplay with the landing warning and upcoming pieces](https://raw.githubusercontent.com/chainsawteam-org/js13kgames2026-nimbus/competition-2026/public/press/gameplay-desktop.png?v=424e3d0)
 
 *Captured from the competition entry. [Full-size desktop screenshot](public/press/gameplay-desktop.png).*
 
 ### Mobile gameplay
 
-<img src="https://raw.githubusercontent.com/chainsawteam-org/js13kgames2026-nimbus/competition-2026/public/press/gameplay-mobile.png" alt="Mobile gameplay with on-screen touch controls" width="390">
+<img src="https://raw.githubusercontent.com/chainsawteam-org/js13kgames2026-nimbus/competition-2026/public/press/gameplay-mobile.png?v=424e3d0" alt="Mobile gameplay with on-screen touch controls" width="390">
 
 *Captured at 390 × 844. [Full-size mobile screenshot](public/press/gameplay-mobile.png).*
 
 ### Rainbow checkpoint
 
-![Nimbo on a glowing rainbow checkpoint platform](https://raw.githubusercontent.com/chainsawteam-org/js13kgames2026-nimbus/competition-2026/public/press/checkpoint.png)
+![Nimbo on a glowing rainbow checkpoint platform](https://raw.githubusercontent.com/chainsawteam-org/js13kgames2026-nimbus/competition-2026/public/press/checkpoint.png?v=424e3d0)
 
 *Staged checkpoint demonstration using the game renderer. [Full-size checkpoint scene](public/press/checkpoint.png).*
 
