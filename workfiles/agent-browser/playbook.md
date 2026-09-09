@@ -40,3 +40,12 @@ Cumulative results and final duration are appended below after completion.
 - Final13158-byte entry: practice shows Connected +N; after practice the piece spawns behind the edge and requests movement right. Six Space presses from10m caused loss/restart instead of an endless path. This browser check accompanies100 randomized anti-spam simulations.
 - Chrome agent-browser0.37.1: entry start/drop,390x844 screenshot edge-mobile.png, no console errors. Firefox155.0: desktop, portrait, landscape, touch emulation, pause/sound/offline checks pass. Dev/built desktop/mobile screenshots inspected; no overflow/errors, identical smoke baseline. Higher spawns initially clipped at the top; fixed camera framing adjusted and rechecked.
 - Earlier18-minute play evidence applies to the superseded rules. This update has focused browser verification, not a fresh15-minute final-release session. Physical devices and in-app focus-loss coverage remain outstanding.
+
+## Preview server recovery
+- User reported connection refused. Confirmed nothing listening on8080; prior dev log had no application crash message.
+- startup.sh now launches npm run dev as a detached Node child with ignored stdin and file logs. Startup returned, subsequent independent HTTP check returned200; second startup remained idempotent.
+- Existing in-app error tab could not navigate because its underlying error document used a blocked data URL. A fresh in-app tab loaded the original HTTP game address successfully. Marked deliverable and shown; visually confirmed scene/title, clicked Let's weave, verified practice controls and no console errors.
+
+## Restore stacking from0c1e875
+- Reloaded existing deliverable tab8 at http://127.0.0.1:8080/entry/index.html. Verified Cloud tower label, original climb/clear rules and frontal camera visually. Started, moved left/right, rotated, dropped pieces, climbed2m and paused successfully.
+- All16 stacking regressions pass; typecheck/build pass. Generated ZIP11977bytes is byte-identical to0c1e875. Dev/built desktop/mobile screenshots inspected; clean console and matching baseline. Firefox155.0 desktop/portrait/landscape touch emulation, pause/mute/offline-input checks pass. Fresh15-minute final-release acceptance has not been repeated.

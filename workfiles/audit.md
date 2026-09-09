@@ -52,3 +52,10 @@
 - After practice, pieces spawn behind Nimbo instead of following the gap. New pieces start high enough to allow adjustment above accumulated clouds. Clear gravity no longer interrupts a supported bridge walk.
 - All25 tests pass, including100 randomized Space-only runs ending below20m and an intentional-placement policy progressing beyond80m. This is regression evidence, not a claim that fun is objectively proven.
 - The4,000-token task budget was exceeded investigating the placement/spawn interaction; implementation is checkpointed here.
+
+## Checkpoint 7 — restore polished stacking
+- Owner explicitly requested the version before the isometric/rainbow redesign. Restored gameplay, camera, UI, assets, rules and regression tests from0c1e875. No history reset; experimental versions remain in Git history.
+- Preserved the detached preview-server startup fix and cumulative audit/play records. Tower climbing, height scores, line/full-row clears, support revalidation/falling, input release, synthesized audio safeguards and renderer capacity fixes are restored together.
+- Rainbow gameplay verification is historical and does not describe the restored rules. Fresh restore checks follow below.
+
+- Restore verified:16/16 engine tests, typecheck, full build, desktop/mobile dev+built rendering, Firefox155.0 input/offline checks. ZIP11977bytes exactly matches0c1e875. In-app movement/rotation/drop/climb/pause verified. Further engine work stays within tower stacking; no new bridge rules remain.

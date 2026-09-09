@@ -5,5 +5,6 @@
     "public/nimbo.zip": "c923536ba109279bdabd07d5b7cdc17222f1ae0dc880a8be60d2571b7a70b9b6",
     "js13k/src/game.js": "d3a6a546015ffd6481d2a10813f8c40ab47d38a5abdf2d48481e7c1a12cb745f",
     "js13k/src/page.html": "64ad009cf8b3119a47992ddf30b675d156e15ce70d973fadf2482240cd4a8e71"
-  }
+  },
+  "status": "Historical edge-connection verification; superseded by stacking restoration"
 }

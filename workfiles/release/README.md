@@ -1,6 +1,6 @@
 # Nimbo — js13kGames 2026
 
-Place falling clouds to build an endless rainbow for a little unicorn.
+Stack clouds into a staircase and help a little unicorn escape the rising fog.
 The standalone competition game is in `js13k/src/`. The home preview plays that
 exact packed entry; the Original studio button opens the earlier Three.js version.
 
@@ -30,11 +30,14 @@ network assets or audio downloads are required by the entry.
 ## Controls
 
 A/D or arrows move. W/X/up rotates clockwise; Q/Z rotates counterclockwise.
-S/down soft drops; Space builds immediately. P/Escape pauses, M toggles sound.
+S/down soft drops; Space hard drops. P/Escape pauses, M toggles sound.
 Touch controls provide move, rotate, soft/hard drop. Tap the board to rotate,
 swipe horizontally to nudge, or swipe down to drop.
 
-Only a placement spanning the bridge edge and its next gap creates rainbow. Fill the highlighted next gap so Nimbo can walk forward in her own lane. The first three pieces are untimed practice. Follow the placement forecast; color matches are optional. Five touching clouds of one color clear and push the fog back. Each seven-piece bag contains exactly one prism, which also relieves fog. Distance is the score. Manual zoom: +/−; 0 resets the fixed perspective view. Rainbow best scores use nimbo-rainbow-best-v1; original tower scores remain preserved.
+Nimbo hops up at most two cells and across one. Five matching clouds in a
+horizontal or vertical line, or a full row, clear and push fog back. Each bag
+contains all seven tetrominoes and one rainbow piece. Height is the score;
+clouds clearing may lower Nimbo, but never erase the best height achieved.
 
 ## Credits and provenance
 
@@ -51,5 +54,3 @@ implied by publishing readable source.
 
 See `workfiles/audit.md`, `workfiles/agent-browser/playbook.md` and the release JSON
 files for measured verification. Competition-site saving and acceptance are deferred at the owner's request.
-
-Placement rule update: overlap the last rainbow tile and the next gap. Only Connected placements extend the path. Rotate for greater reach; disconnected drops cost fog distance. Match five touching colors to clear space and relieve fog. After the three untimed practice pieces, clouds spawn behind the bridge edge and must be moved into place.

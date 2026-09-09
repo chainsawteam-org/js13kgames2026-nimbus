@@ -2,7 +2,9 @@
 
 Theme: **Unicorns and Rainbows**.
 
-Drop clouds onto the highlighted gap to extend an endless rainbow. Connect each piece across the bridge edge. Nimbo walks automatically; cloud stacks cannot block her lane. The first three drops are untimed practice. Five touching colors are an optional fog-relief bonus.
+Stack pastel tetromino clouds into a tower. Nimbo the unicorn climbs by herself.
+Keep a continuous path. Rainbow (prism) pieces push the fog back. If the fog
+catches her, she falls asleep.
 
 This folder is the **readable source** for the 13 KB competition entry.
 The main preview plays the exact competition entry. The Original studio action
@@ -37,7 +39,7 @@ Writes a zip with a single root `index.html` (no external resources):
 
 Source files:
 
-- [`src/game.js`](src/game.js) — W renderer, tetromino sim, unicorn rainbow traversal, Web Audio
+- [`src/game.js`](src/game.js) — W renderer, tetromino sim, unicorn BFS climb, Web Audio
 - [`src/page.html`](src/page.html) — standalone entry template
 - [`src/page.css`](src/page.css) — overlay HUD / title / touch pad
 - [`../scripts/pack-js13k.mjs`](../scripts/pack-js13k.mjs) — terser + roadroller + zip
@@ -49,9 +51,7 @@ Source files:
 | A / D or arrows — move | pad ‹ › |
 | W / X — rotate, Z / Q reverse | ↻ or tap canvas |
 | S — soft drop | ↓ |
-| Space — hard drop | BUILD or swipe down |
+| Space — hard drop | DROP or swipe down |
 | P / Esc — pause, M — mute | buttons |
 
-Works offline; recorded browser verification is in `../workfiles/release/`. `localStorage` key is `nimbo-rainbow-best-v1` (previous tower scores are preserved).
-
-Placement rule update: overlap the last rainbow tile and the next gap. Only Connected placements extend the path. Rotate for greater reach; disconnected drops cost fog distance. Match five touching colors to clear space and relieve fog. After the three untimed practice pieces, clouds spawn behind the bridge edge and must be moved into place.
+Works offline; recorded browser verification is in `../workfiles/release/`. `localStorage` key is `nimbo-best-v1`.

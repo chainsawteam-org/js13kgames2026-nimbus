@@ -1,6 +1,6 @@
 {
   "version": "155.0",
-  "url": "http://127.0.0.1:8082/",
+  "url": "http://127.0.0.1:8080/entry/index.html",
   "viewports": [
     {
       "viewport": {
@@ -10,9 +10,9 @@
       "errors": [],
       "external": [],
       "requests": [
-        "http://127.0.0.1:8082/"
+        "http://127.0.0.1:8080/entry/index.html"
       ],
-      "height": "3",
+      "height": "5",
       "overflow": false,
       "offlineInput": true
     },
@@ -24,9 +24,9 @@
       "errors": [],
       "external": [],
       "requests": [
-        "http://127.0.0.1:8082/"
+        "http://127.0.0.1:8080/entry/index.html"
       ],
-      "height": "3",
+      "height": "4",
       "overflow": false,
       "offlineInput": true
     },
@@ -38,7 +38,7 @@
       "errors": [],
       "external": [],
       "requests": [
-        "http://127.0.0.1:8082/"
+        "http://127.0.0.1:8080/entry/index.html"
       ],
       "height": "3",
       "overflow": false,

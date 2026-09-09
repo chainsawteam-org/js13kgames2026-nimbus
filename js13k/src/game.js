@@ -1,8 +1,8 @@
 (() => {
   // Nimbo — js13k 2026. W-style WebGL2 (xem/W, public domain): cubes, spheres,
   // pyramids, groups, camera, dFdx lighting. Same trick as Clawnicorn.
-  const COLS = 24;
-  const STRIDE = 32;
+  const COLS = 10;
+  const STRIDE = 16;
   const M = Math;
   const IDS = [0, 1, 2, 3, 4, 5, 6];
   const PAL = [
@@ -196,10 +196,10 @@
     render: renderW,
   };
 
-  let camY = 9, last = 0, acc = 0, trauma = 0, facing = 1, squash = 1, zoom = 1, scrollEase = 0;
+  let camY = 4, last = 0, acc = 0, trauma = 0, facing = 1, squash = 1;
   let mode = "title", muted = 0, best = 0, celebration = 0, frameTime = 0;
   try {
-    best = M.max(0, +localStorage.getItem("nimbo-rainbow-best-v1") || 0);
+    best = M.max(0, +localStorage.getItem("nimbo-best-v1") || 0);
     if (!Number.isFinite(best)) best = 0;
     muted = localStorage.getItem('nimbo-muted-v1') === '1';
   } catch (e) { /* Storage is optional. */ }
@@ -215,23 +215,27 @@
   function kx(key) { return +key % STRIDE; }
   function ky(key) { return (+key / STRIDE) | 0; }
   function cells(id, rot, x, y) { return SH[id][rot].map(([cx, cy]) => [cx + x, cy + y]); }
-  function wx(x) { return x - (COLS - 1) / 2 + scrollEase; }
-  function base(st,x) { return 3+M.round(6*M.sin(((x+st.offset)%24+24)%24*M.PI/24)); }
-  function floorAt(st,x) { return base(st,x)+(st.bridge[x]?1:0); }
+  function wx(x) { return x - (COLS - 1) / 2; }
 
   function reset(kind) {
-    const st={
-      board:{},bridge:{},offset:0,woven:0,drops:0,active:null,bag:[],queue:[],placed:0,
-      uni:{x:1,y:4,vx:1,vy:4,max:0},path:[],hopF:null,hopT:null,hopA:0,hopD:.34,idle:0,
-      fog:-5.5,combo:0,height:0,fallT:0,lockT:0,lockN:0,fallY:0,
-      pop:null,popT:0,lockBefore:0,popChain:0,falling:false,fallSpeed:0
+    const st = {
+      board: {}, active: null, bag: [], queue: [], placed: 0,
+      uni: { x: 1, y: 0, vx: 1, vy: 0, max: 0 },
+      path: [], hopF: null, hopT: null, hopA: 0, hopD: 0.34, idle: 0,
+      fog: -5.5, combo: 0, height: 0, fallT: 0, lockT: 0, lockN: 0, fallY: 0,
+      pop: null, popT: 0, lockBefore: 0, popChain: 0, falling: false, fallSpeed: 0,
     };
-    for(let x=0;x<(kind==='title'?21:5);x++) st.bridge[x]=1;
-    st.uni.y=st.uni.vy=base(st,1);
-    if(kind==='title') {
-      for(let x=8;x<17;x++) st.board[k(x,base(st,x)+1)]=PAL[(x/3|0)%7];
-      st.uni.x=st.uni.vx=6;st.uni.y=st.uni.vy=base(st,6);mode='title';
-    } else {mode='playing';fillQ(st);spawn(st);repath(st)}
+    if (kind === "title") {
+      const stairs = [[1, 0, 5], [2, 0, 5], [2, 1, 2], [3, 1, 2], [3, 2, 3], [4, 2, 3], [4, 3, 6], [5, 3, 6], [5, 4, 0], [4, 5, 4], [3, 5, 4], [3, 6, 2], [2, 7, 5], [2, 8, 0], [3, 9, 1], [4, 9, 1], [4, 10, 6]];
+      for (const [x, y, id] of stairs) st.board[k(x, y)] = y > 6 ? RB[y % 7] : PAL[id];
+      st.uni = { x: 1, y: 0, vx: 1, vy: 0, max: 0 };
+      repath(st);
+      mode = "title";
+    } else {
+      mode = "playing";
+      fillQ(st);
+      spawn(st);
+    }
     return st;
   }
 
@@ -254,27 +258,16 @@
 
   function fits(st, id, rot, x, y) {
     for (const [cx, cy] of cells(id, rot, x, y)) {
-      if (cx < 0 || cx >= COLS || cy < floorAt(st,cx) || st.board[k(cx, cy)]) return 0;
+      if (cx < 0 || cx >= COLS || cy < 0 || st.board[k(cx, cy)]) return 0;
     }
     return 1;
   }
 
-  function nextGap(st) {
-    let x=st.uni.x;
-    while(x<COLS && st.bridge[x])x++;
-    return x;
-  }
-  function connects(st,xs) {
-    const gap=nextGap(st);
-    return xs.includes(gap-1)&&xs.includes(gap);
-  }
   function spawn(st) {
     fillQ(st);
     const n = st.queue.shift();
     fillQ(st);
-    const left=M.min(...SH[n.id][0].map(c=>c[0]));
-    const p={id:n.id,x:M.min(COLS-4,M.max(0,(st.drops<3?nextGap(st)-1-left:st.uni.x-3))),y:18,rot:0,prism:n.prism};
-    st.placed++;
+    const p = { id: n.id, x: [3, 0, 6, 1, 5, 0, 6][st.placed++ % 7], y: maxY(st) + 4, rot: 0, prism: n.prism };
     if (!fits(st, p.id, p.rot, p.x, p.y)) p.y += 2;
     st.active = p;
     st.fallT = st.lockT = st.lockN = 0;
@@ -331,20 +324,10 @@
   function lock() {
     const p = S.active;
     if (!p) return;
-    const before = reachable(S).best.x;
+    const before = reachable(S).best.y;
     const cs = cells(p.id, p.rot, p.x, p.y);
-    S.drops++;
-    const columns=[...new Set(cs.map(c=>c[0]))];
-    const joined=connects(S,columns);
-    if(S.drops>3)S.fog+=joined?.35:2.5;
-    for(const x of columns) {
-      if(joined&&!S.bridge[x]){S.bridge[x]=1;S.woven++}
-      if(cs.some(c=>c[0]===x&&c[1]>base(S,x)+4)) {
-        for(const key in S.board)if(kx(key)===x)delete S.board[key];
-      }
-    }
-    cs.forEach(([x,y],i)=>{S.board[k(x,M.min(y,base(S,x)+4))]=p.prism?RB[i%7]:PAL[p.id]});
-    if (p.prism && joined) { S.fog -= 2.4; celebration = 1.8; blip("p"); }
+    cs.forEach(([x, y], i) => { S.board[k(x, y)] = p.prism ? RB[i % 7] : PAL[p.id]; });
+    if (p.prism) { S.fog -= 2.4; celebration = 1.8; blip("p"); }
     blip("l");
     trauma = M.min(1, trauma + 0.22);
     S.active = null;
@@ -368,7 +351,7 @@
 
   function afterLock(before) {
     repath(S);
-    const after = reachable(S).best.x;
+    const after = reachable(S).best.y;
     if (after > before || S.popChain) { S.combo++; blip("c"); } else S.combo = 0;
     S.popChain = 0;
     spawn(S);
@@ -379,35 +362,47 @@
     return a && b && a[0] === b[0] && a[1] === b[1] && a[2] === b[2];
   }
 
-  // Touching groups clear cloud space; only connected placements extend the road.
   function findKills(st, extra) {
-    const board={...st.board,...extra},seen={},kill=[];
-    for(const key in board) {
-      if(seen[key]) continue;
-      const group=[key];seen[key]=1;
-      for(let i=0;i<group.length;i++) {
-        const x=kx(group[i]),y=ky(group[i]);
-        for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]]) {
-          const nx=x+dx,ny=y+dy,n=k(nx,ny);
-          if(nx<0||nx>=COLS||ny<0||seen[n]||!same(board[key],board[n])) continue;
-          seen[n]=1;group.push(String(n));
-        }
+    const col = (x, y) => (extra && extra[k(x, y)]) || st.board[k(x, y)];
+    const kill = {};
+    let max = 0;
+    for (const key in st.board) { const y = ky(key); if (y > max) max = y; }
+    if (extra) for (const key in extra) { const y = ky(key); if (y > max) max = y; }
+    for (let y = 0; y <= max; y++) {
+      let run = 1;
+      for (let x = 1; x < COLS; x++) {
+        if (same(col(x - 1, y), col(x, y))) run++; else run = 1;
+        if (run >= 5) for (let i = 0; i < run; i++) kill[k(x - i, y)] = 1;
       }
-      if(group.length>=5) kill.push(...group);
+      let filled = 0;
+      for (let x = 0; x < COLS; x++) if (col(x, y)) filled++;
+      if (filled === COLS) for (let x = 0; x < COLS; x++) kill[k(x, y)] = 1;
     }
-    return kill;
+    for (let x = 0; x < COLS; x++) {
+      let run = 1;
+      for (let y = 1; y <= max; y++) {
+        if (same(col(x, y - 1), col(x, y))) run++; else run = 1;
+        if (run >= 5) for (let i = 0; i < run; i++) kill[k(x, y - i)] = 1;
+      }
+    }
+    return Object.keys(kill);
   }
 
   function grav(st) {
-    const max=maxY(st);
-    for(let x=0;x<COLS;x++) {
-      const colors=[];
-      for(let y=base(st,x);y<=max;y++) {
-        const key=k(x,y);if(st.board[key]){colors.push(st.board[key]);delete st.board[key]}
+    const max = maxY(st), floor = M.max(0, st.fog - 2 | 0);
+    for (let x = 0; x < COLS; x++) {
+      for (let y = floor; y <= max; y++) {
+        const key = k(x, y);
+        const c = st.board[key];
+        if (!c) continue;
+        let ny = y;
+        while (ny > floor && !st.board[k(x, ny - 1)]) ny--;
+        if (ny === y) continue;
+        delete st.board[key];
+        st.board[k(x, ny)] = c;
       }
-      colors.forEach((c,i)=>st.board[k(x,floorAt(st,x)+i)]=c);
     }
-    if(!st.hopT&&!walk(st,st.uni.x,st.uni.y))beginFall(st);
+    beginFall(st);
   }
 
   // Clouds can disappear during a hop. Fall where Nimbo actually is,
@@ -444,9 +439,7 @@
       S.pop.forEach((key) => boom(kx(key), ky(key), 2));
     }
     if (S.popT > 0) return 1;
-    S.pop.forEach((key)=>{
-      delete S.board[key];
-    });
+    S.pop.forEach((key) => delete S.board[key]);
     S.pop = null;
     S.fog -= 1.4;
     blip("v");
@@ -458,8 +451,8 @@
     return 1;
   }
 
-  function occupy(st,x,y) { return st.board[k(x,y)] || (st.bridge[x] && y===base(st,x)); }
-  function walk(st,x,y) { return !!st.bridge[x] && y===base(st,x); }
+  function occupy(st, x, y) { return st.board[k(x, y)]; }
+  function walk(st, x, y) { return y === 0 || occupy(st, x, y); }
 
   function reachable(st) {
     const start = k(st.uni.x, st.uni.y);
@@ -467,7 +460,7 @@
     let bestC = q[0], qi = 0;
     while (qi < q.length) {
       const [x, y] = q[qi++];
-      if (x>bestC[0] || (x===bestC[0] && y<bestC[1])) bestC=[x,y];
+      if (y > bestC[1] || (y === bestC[1] && M.abs(x - 4.5) < M.abs(bestC[0] - 4.5))) bestC = [x, y];
       for (let dx = -1; dx <= 1; dx++) for (let dy = -1; dy <= 2; dy++) {
         if (!dx && !dy) continue;
         const nx = x + dx, ny = y + dy;
@@ -507,26 +500,19 @@
     }
     if (mode === "playing") {
       if (S.pop) tickPop(dt);
-      else if(S.drops>=3 || hold.s)tickPiece(dt);
-      if(S.drops>=3)S.fog=M.max(S.uni.vx-12,S.fog+(.12+M.min(.22,S.height*.0015))*dt);
-      if(S.fog>S.uni.vx-.5 || S.uni.vy<-1){die();return}
+      else tickPiece(dt);
+      S.fog += (0.15 + S.height * 0.0045) * dt;
+      if (S.fog > S.uni.vy - 0.15) { die(); return; }
     }
     tickUni(dt);
-    // Scroll the world under a fixed lens, keeping allocation bounded.
-    if(mode==='playing'&&!S.hopT&&!S.falling&&S.uni.x>7) {
-      const board={},bridge={};
-      for(const key in S.board) if(kx(key)>0) board[k(kx(key)-1,ky(key))]=S.board[key];
-      for(const x in S.bridge) if(+x>0) bridge[+x-1]=1;
-      S.board=board;S.bridge=bridge;S.offset++;S.fog--;
-      S.uni.x--;S.uni.vx--;if(S.active)S.active.x=M.max(0,S.active.x-1);
-      scrollEase+=1;repath(S);
-    }
+    const cut = S.fog - 2 | 0;
+    if (cut >= 0) for (const key in S.board) if (ky(key) < cut) delete S.board[key];
   }
 
   function tickPiece(dt) {
     const p = S.active;
     if (!p) return;
-    const iv = hold.s ? 0.045 : M.max(.38,.85-S.height*.0015);
+    const iv = hold.s ? 0.045 : M.max(0.3, 0.92 - S.height * 0.014);
     S.fallT += dt;
     while (S.fallT >= iv) {
       S.fallT -= iv;
@@ -543,7 +529,7 @@
     if (S.pop) return;
     if (S.falling) {
       const u = S.uni;
-      let floor = S.bridge[u.x] && base(S,u.x)<=u.vy+.05 ? base(S,u.x) : -3;
+      let floor = 0;
       for (const key in S.board) {
         const y = ky(key);
         if (kx(key) === u.x && y <= u.vy + 0.05 && y > floor) floor = y;
@@ -551,7 +537,7 @@
       S.fallSpeed += dt * 12;
       u.vy = M.max(floor, u.vy - S.fallSpeed * dt);
       u.vx += (u.x - u.vx) * M.min(1, dt * 10);
-      if (u.vy <= floor && floor>=0) {
+      if (u.vy <= floor) {
         u.y = floor; u.vx = u.x; S.falling = false;
         squash = 0.82; boom(u.x, u.y, 5); repath(S);
       }
@@ -570,13 +556,12 @@
         squash = 0.72;
         blip("n");
         boom(to.x, to.y, 5);
-        const distance=S.offset+to.x-1;
-        if(distance>S.uni.max) {
-          if((distance/10|0)>(S.height/10|0)) {
+        if (to.y > S.uni.max) {
+          if ((to.y / 10 | 0) > (S.height / 10 | 0)) {
             celebration = 3; blip('k');
-            $('message').textContent = (distance/10|0)*10+' m · Follow your rainbow';
+            $('message').textContent = (to.y / 10 | 0) * 10 + ' m · A little closer to the stars';
           }
-          S.uni.max=distance;S.height=distance; hud();
+          S.uni.max = to.y; S.height = to.y; hud();
         }
         repath(S);
       }
@@ -595,7 +580,10 @@
     }
     S.idle += dt;
     S.uni.vy = S.uni.y + M.sin(S.idle * 2.2) * 0.04;
-
+    if (mode === "title" && S.idle > 2.8) {
+      S.uni.x = 1; S.uni.y = 0; S.uni.vx = 1; S.uni.vy = 0;
+      repath(S); S.idle = 0;
+    }
   }
 
   function die() {
@@ -604,7 +592,7 @@
     S.active = null;
     blip("o");
     best = M.max(best, S.height);
-    try { localStorage.setItem("nimbo-rainbow-best-v1", "" + best); } catch (e) { /* ignore */ }
+    try { localStorage.setItem("nimbo-best-v1", "" + best); } catch (e) { /* ignore */ }
     $("oh").textContent = S.height;
     $("ob").textContent = S.height >= best && S.height > 0 ? "A new personal best!" : "Best climb: " + best + " m";
     show("over", 1); show("hud", 0); show("pad", 0); show("pauseBtn", 0);
@@ -616,9 +604,9 @@
     unlock();
     blip("s");
     Object.assign(S, reset("play"));
-    camY=9;scrollEase=0;trauma=0;squash=1;facing=1;
+    camY = 3; trauma = 0; squash = 1; facing = 1;
     show("title", 0); show("over", 0); show("pause", 0);
-    show("hud", 1); show("pad",1); show("pauseBtn", 1);
+    show("hud", 1); show("pad", innerWidth < 800); show("pauseBtn", 1);
     hud();
   }
 
@@ -666,9 +654,6 @@
       if (c === "ArrowDown" || c === "KeyS") hold.s = 0;
       return;
     }
-    if(c==='Equal'||c==='NumpadAdd')return changeZoom(-.12);
-    if(c==='Minus'||c==='NumpadSubtract')return changeZoom(.12);
-    if(c==='Digit0')return changeZoom(0);
     if (c === "KeyM") return toggleMute();
     if (c === "KeyP" || c === "Escape") {
       if (mode === "playing") pause();
@@ -830,14 +815,24 @@
       W.gl.viewport(0, 0, canvas.width, canvas.height);
       W.camera({ fov: innerWidth / innerHeight < 0.8 ? 46 : 38 });
     }
-    if (mode === 'playing') show('pad',1);
+    if (mode === 'playing') show('pad', w < 800);
   }
 
   function buildScene() {
     W.ambient(0.68);
     W.light({ x: -0.45, y: -0.82, z: -0.38 });
-    for(let i=0;i<6;i++)W.sphere({n:"mist"+i,w:7,h:4,d:4,b:[.78,.73,.9]});
+    W.cloud({ n: "base", y: -1.1, w: 11.8, h: 1.35, d: 3.3, b: CREAM });
+    W.cloud({ n: "fog", y: -8, w: 40, h: 10, d: 10, b: [0.68, 0.58, 0.8] });
     for (let i = 0; i < 16; i++) W.cloud({ n: "cl" + i, w: 2.5 + i % 3, h: 0.6 + i % 2 * 0.3, d: 1.3, b: [0.91,0.86,0.97] });
+    // Each rainbow band shares the same compact mesh.
+    const vertices = [], indices = [];
+    for (let i = 0; i <= 40; i++) {
+      const a = i / 40 * M.PI;
+      for (const r of [0.94,1]) vertices.push(M.cos(a)*r, M.sin(a)*r, 0);
+      if (i < 40) { const n=i*2; indices.push(n,n+1,n+2,n+1,n+3,n+2); }
+    }
+    models.arc = { vertices, indices };
+    for (let i = 0; i < 7; i++) setState({n:'rb'+i,w:8-i*.3,h:8-i*.3,y:0,z:-5,b:RB[i]}, 'arc');
     W.group({ n: "uni" });
     const part = (n,x,y,z,w,h,d,b=CREAM) => W.sphere({n,g:'uni',x,y,z,w,h,d,b});
     part('body',0,.52,0,.72,.65,1.05);
@@ -864,83 +859,112 @@
     part('glint',0,1.99,.69,.08,.12,.08,CREAM);
   }
 
-  function changeZoom(n) {
-    zoom=n===0?1:M.max(.72,M.min(1.45,zoom+n));
-    $('zoomLabel').textContent=M.round(100/zoom)+'%';
-  }
-  let usedPuffs=0,forecastText="";
+  let usedPuffs = 0;
   function syncScene(dt) {
-    if(mode==='paused')dt=0;
-    scrollEase*=M.exp(-5*dt);
-    const aspect=innerWidth/innerHeight;
-    const dist=M.max(33,29/(2*M.tan(M.PI/9)*aspect))*zoom;
-    // Fixed isometric orientation with a perspective lens. Only the road scrolls.
-    const ry=22*M.PI/180,rx=24*M.PI/180;
-    W.camera({x:M.sin(ry)*dist,y:12+M.sin(rx)*M.cos(ry)*dist,z:M.cos(rx)*M.cos(ry)*dist,rx:-24,ry:22,fov:40});
-    const dusk=M.min(1,S.height/150);
-    W.clearColor([.82-dusk*.08,.77-dusk*.09,.95-dusk*.025]);
-    for(let j=0;j<6;j++)W.move({n:'mist'+j,x:wx(S.fog)-5+M.sin(j)*2,y:2+(j%3)*4,z:-2-j*.3});
-    for(let j=0;j<16;j++) W.move({n:'cl'+j,x:(j%8-3.5)*5,y:-3+(j%3)*7,z:-10-(j%4)*4,w:3+j%3});
-    frameTime+=dt;celebration=M.max(0,celebration-dt);
-    squash+=(1-squash)*(1-M.exp(-12*dt));
-    $('message').style.opacity=celebration>2?1:0;
+    const u = S.uni;
+    let landMin = u.vy, pieceMax = u.vy;
+    if (S.active) {
+      const gy = ghostY(S);
+      const cs = cells(S.active.id, S.active.rot, S.active.x, S.active.y);
+      for (const [, y] of cs) {
+        pieceMax = M.max(pieceMax, y);
+        landMin = M.min(landMin, y - (S.active.y - gy));
+      }
+    }
+    let lo = M.min(landMin, u.vy) - 2.6;
+    if (landMin <= 6) lo = M.min(lo, -1.7);
+    const hi = M.max(pieceMax + 2.3, u.vy + 3);
+    const spanAll = M.max(8, hi - lo);
+    const want = (lo + hi) / 2;
+    camY += (want - camY) * (1 - M.exp(-3.2 * dt));
+    trauma = M.max(0, trauma - dt * 1.6);
+    squash += (1 - squash) * (1-M.exp(-12*dt));
+    const sh = reduced ? 0 : trauma * trauma;
+    const ox = (M.random() - 0.5) * sh * 0.35;
+    const oy = (M.random() - 0.5) * sh * 0.25;
+    const portrait = innerWidth / innerHeight < .8;
+    const dist = M.max(16, spanAll * 1.5, 6.5 / M.tan(20*M.PI/180) / (innerWidth/innerHeight));
+    const titleOffset = mode === 'title' && innerWidth > 799 ? -3.6 : 0;
+    W.camera({x:titleOffset+ox, y:camY+oy, z:dist, rx:0, ry:0, fov:40});
+    const dusk = M.min(1, S.height / 60);
+    W.clearColor([.81-dusk*.11,.74-dusk*.14,.94-dusk*.04]);
+    W.move({n:'fog',y:S.fog-5});
+    for (let j=0;j<16;j++) W.move({n:'cl'+j,x:(j&1?1:-1)*(6.8+j%4),y:camY+(j*2.7%22)-10,z:-6-j%3});
+    for (let j=0;j<7;j++) W.move({n:'rb'+j,y:camY-2+(celebration>0?.3:0),z:-5});
+    frameTime += mode === 'paused' ? 0 : dt;
+    if (mode !== 'paused') celebration=M.max(0,celebration-dt);
+    $('message').style.opacity=celebration>2 ? 1:0;
     $('status').style.display=mode==='playing'?'block':'none';
-    $('forecast').style.display=mode==='playing'?'block':'none';
-    const clearance=M.max(0,S.uni.vx-S.fog);
-    $('fogbar').style.width=M.max(0,100-clearance*10)+'%';
-    $('danger').textContent=S.drops<3?'Practice '+(S.drops+1)+'/3 · No time limit':clearance<2?'Fog is close! Build the next gap':'Fog behind · '+clearance.toFixed(1)+' m';
-    $('route').textContent=S.path.length||S.hopT?'Nimbo follows your rainbow automatically':'Fill the bright outline to help Nimbo';
-    let i=0;
-    const put=(x,y,c,w=.9,h=w*.92,d=w,rz=0,z=0)=>{
-      if(!nodes['p'+i])W.cloud({n:'p'+i});
-      W.move({n:'p'+i,x,y,z,w,h,d,rz,b:c});i++;
+    const clearance=M.max(0,S.uni.vy-S.fog);
+    $('fogbar').style.width=M.max(0,100-clearance*12)+'%';
+    $('danger').textContent=clearance<2 ? 'Fog is close! Find higher ground' : 'Room to breathe · '+clearance.toFixed(1)+' m';
+    $('route').textContent=S.path.length || S.hopT ? 'Follow the golden stepping stones' : 'Build within 1 across / 2 up';
+    let i = 0;
+    const put = (px, py, c, s) => {
+      if (!nodes['p'+i]) W.cloud({n:'p'+i});
+      W.move({ n: "p" + i, x: px, y: py + 0.05, z: s < .3 ? .55 : 0, w: s, h: s * 0.92, d: s, b: c });
+      i++;
     };
-    const extra={},p=S.active;
-    let gy=0;
-    if(p){gy=ghostY(S);cells(p.id,p.rot,p.x,gy).forEach(([x,y],j)=>extra[k(x,y)]=p.prism?RB[j%7]:PAL[p.id])}
-    const pending=p?findKills(S,extra):[],hot={};pending.forEach(key=>hot[key]=1);
-    const added=[...new Set(Object.keys(extra).map(kx))].filter(x=>!S.bridge[x]).length;
-    const xs=Object.keys(extra).map(kx),gap=nextGap(S),joined=connects(S,xs);
-    const forecast='<b>'+(joined?'Connected · +'+added+' rainbow tiles':M.max(...xs)<gap?'Move right to the rainbow edge →':M.min(...xs)>=gap?'← Overlap the last rainbow tile':'Rotate to span the edge + gap')+'</b><span>'+(S.drops<3?'Practice · Connect, then SPACE / BUILD':pending.length?pending.length+' matching clouds: clear + fog relief':joined?'Wider pieces go farther · BUILD':'Disconnected drops cost fog distance')+'</span>';
-    if(forecast!==forecastText){forecastText=forecast;$('forecast').innerHTML=forecast}
-    // Draw the complete construction window, including unfilled rainbow gaps.
-    for(let x=0;x<COLS;x++) {
-      const y=base(S,x), next=base(S,x+1), angle=M.atan2(next-y,1)*180/M.PI;
-      if(S.bridge[x]) {
-        for(let j=0;j<7;j++)put(wx(x)+.5,(y+next)/2+.38-j*.24,RB[j],M.hypot(1,next-y)*1.05,.29,3,angle);
-      } else {
-        put(wx(x),y-.22,[.9,.87,.96],.85,.08,1.45);
-        if(x===nextGap(S))for(const dx of [-.5,.5])put(wx(x)+dx,y+.15,GOLD,.12,.15,2.1);
-      }
+    const place = (x, y, c, s) => put(wx(x), y, c, s);
+    const extra = {};
+    if (S.active && mode === "playing") {
+      const gy0 = ghostY(S);
+      cells(S.active.id, S.active.rot, S.active.x, gy0).forEach(([x, y], j) => {
+        extra[k(x, y)] = S.active.prism ? RB[j % 7] : PAL[S.active.id];
+      });
     }
-    for(const key in S.board) {
-      const x=kx(key),y=ky(key),popping=S.pop&&S.pop.includes(key);
-      put(wx(x),y+.05,popping?RB[(x+y)%7]:S.board[key],popping?1:.9);
+    const pending = mode === "playing" ? findKills(S, extra) : [];
+    const hot = {};
+    pending.forEach((key) => { hot[key] = 1; });
+    const GOLDG = [1, 0.95, 0.45];
+    for (const key in S.board) {
+      const x = kx(key), y = ky(key);
+      if (y < lo - 2 || y > hi + 2) continue;
+      const popping = S.pop && S.pop.indexOf(key) >= 0;
+      const c = popping ? RB[(y + x) % 7] : (hot[key] ? GOLDG : S.board[key]);
+      place(x, y, c, popping ? 1.05 : 0.9);
     }
-    if(p&&(mode==='playing'||mode==='paused')) {
-      cells(p.id,p.rot,p.x,p.y).forEach(([x,y],j)=>put(wx(x),y+.05,p.prism?RB[j%7]:PAL[p.id]));
-      for(const key in extra) {
-        const x=kx(key),y=ky(key),c=hot[key]?GOLD:extra[key];
-        for(const [dx,dy] of [[-.43,-.43],[.43,-.43],[.43,.43],[-.43,.43]])put(wx(x)+dx,y+dy,c,.19,.19,.19,0,.7);
-      }
-      for(let x=p.x;x<M.min(COLS,p.x+4);x++)put(wx(x),base(S,x)+5.65,[.75,.7,.82],.7,.035,.035);
+    const p = S.active;
+    if (p && (mode === "playing" || mode === "paused")) {
+      const gy = ghostY(S);
+      const cs = cells(p.id, p.rot, p.x, p.y);
+      cs.forEach(([x, y], j) => {
+        const c = p.prism ? RB[j % 7] : PAL[p.id];
+        place(x, y, c, 0.9);
+        if (gy !== p.y) {
+          const gyy = y - (p.y - gy);
+          const h = 0.42;
+          const col = hot[k(x, gyy)] ? GOLDG : c;
+          const dots = [[-h, -h], [0, -h], [h, -h], [h, 0], [h, h], [0, h], [-h, h], [-h, 0]];
+          for (const [dx, dy] of dots) put(wx(x) + dx, gyy + dy, col, 0.14);
+        }
+      });
     }
-    for(const key of pending) {
-      const x=kx(key),y=ky(key);
-      for(const dx of [-.46,.46])put(wx(x)+dx,y+.05,GOLD,.07,1,.07,0,.54);
+    // Gameplay clouds are allocated first; effects never consume their slots.
+    for (const step of S.path.slice(0,16)) put(wx(step.x),step.y+.52,GOLD,.12);
+    if (!reduced && mode==='playing' && S.hopT && M.random()<dt*14) boom(S.uni.vx,S.uni.vy,1);
+    for (const s of sparks) {
+      s.t -= dt;
+      s.x += s.vx * dt;
+      s.y += s.vy * dt;
+      s.vy -= 7 * dt;
+      if (s.t > 0) put(s.x, s.y, s.c, 0.16);
     }
-    for(const step of S.path.slice(0,24))put(wx(step.x),step.y+.6,GOLD,.2,.12,.2,0,1);
-    if(!reduced&&mode==='playing'&&S.hopT&&M.random()<dt*14)boom(S.uni.vx,S.uni.vy,1);
-    for(const spark of sparks) {
-      spark.t-=dt;spark.x+=spark.vx*dt;spark.y+=spark.vy*dt;spark.vy-=7*dt;
-      if(spark.t>0)put(spark.x,spark.y,spark.c,.13,.13,.13,0,1.1);
-    }
-    sparks=sparks.filter(s=>s.t>0);
-    const count=i;while(i<usedPuffs)W.move({n:'p'+i++,y:-90});usedPuffs=count;
-    const scale=aspect<.8?1.6:1.2;
-    W.move({n:'uni',x:wx(S.uni.vx),y:S.uni.vy+.5,z:1.15,w:scale,h:(reduced?1:squash)*scale,d:scale,ry:facing>0?85:-85});
-    for(let j=0;j<4;j++)W.move({n:'leg'+j,rx:reduced?0:S.hopT?M.sin(frameTime*15+j*M.PI)*28:M.sin(frameTime*2+j)*3});
-    for(let j=0;j<7;j++)W.move({n:'tail'+j,x:M.sin(j*.6)*.14+(reduced?0:M.sin(frameTime*3-j*.5)*.035)});
+    sparks = sparks.filter((s) => s.t > 0);
+    const activeCount=i;
+    while (i < usedPuffs) { W.move({n:'p'+i,y:-90}); i++; }
+    usedPuffs=activeCount;
+
+    W.move({
+      n: "uni",
+      x: mode==='title' && portrait ? 0 : wx(S.uni.vx),
+      y: mode==='title' && portrait ? camY+dist*.19 : S.uni.vy + (occupy(S, S.uni.x | 0, S.uni.y | 0) ? 0.48 : 0.14),
+      z: 0.85,
+      w:1.13,h:reduced?1.13:squash*1.13,d:1.13,
+      ry: facing > 0 ? 55 : -55,
+    });
+    for(let j=0;j<4;j++) W.move({n:'leg'+j,rx:reduced?0:S.hopT?M.sin(frameTime*15+j*M.PI)*28:M.sin(frameTime*2+j)*3});
+    for(let j=0;j<7;j++) W.move({n:'tail'+j,x:M.sin(j*.6)*.14+(reduced?0:M.sin(frameTime*3-j*.5)*.035)});
     W.move({n:'glint',w:reduced?.08:.06+M.sin(frameTime*5)*.035});
   }
 
@@ -961,11 +985,8 @@
   $("resume").onclick = resume;
   $("mute").onclick = toggleMute;
   $("pauseBtn").onclick = pause;
-    $('zi').onclick=()=>changeZoom(-.12);$('zo').onclick=()=>changeZoom(.12);$('zf').onclick=()=>changeZoom(0);
-  canvas.addEventListener('wheel',e=>{e.preventDefault();changeZoom(e.deltaY>0?.08:-.08)},{passive:false});
-
   soundLabel();
-  $("best0").textContent = best ? "Your best: " + best + " m" : "A little magic. An endless rainbow.";
+  $("best0").textContent = best ? "Your best: " + best + " m" : "A small climb. A little magic.";
   requestAnimationFrame(loop);
 
   function loop(now) {
