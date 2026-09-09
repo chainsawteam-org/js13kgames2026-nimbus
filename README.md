@@ -24,7 +24,7 @@ All models, rainbow shaders, sparkles and music are generated procedurally. The 
 
 ### Desktop gameplay
 
-![Desktop gameplay with the landing warning and upcoming pieces](https://raw.githubusercontent.com/chainsawteam-org/js13kgames2026-nimbus/competition-2026/public/press/gameplay-desktop.png?v=424e3d0)
+![Desktop gameplay with the landing warning and upcoming pieces](https://raw.githubusercontent.com/chainsawteam-org/js13kgames2026-nimbus/competition-2026/public/press/gameplay-desktop.png?v=af48131)
 
 *Captured from the competition entry. [Full-size desktop screenshot](public/press/gameplay-desktop.png).*
 
@@ -36,9 +36,7 @@ All models, rainbow shaders, sparkles and music are generated procedurally. The 
 
 ### Rainbow checkpoint
 
-![Nimbo on a glowing rainbow checkpoint platform](https://raw.githubusercontent.com/chainsawteam-org/js13kgames2026-nimbus/competition-2026/public/press/checkpoint.png?v=424e3d0)
-
-*Staged checkpoint demonstration using the game renderer. [Full-size checkpoint scene](public/press/checkpoint.png).*
+[View the rainbow checkpoint scene](public/press/checkpoint.png) — a staged demonstration using the game renderer, available as a full-size 1600 × 900 PNG.
 
 ## Controls
 

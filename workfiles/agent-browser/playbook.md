@@ -88,3 +88,15 @@ User explicitly selected the Codex browser. Connected in-app runtime used for ht
 Local recorder on 8083 captured actual WebGL canvas and Web Audio, including a staged checkpoint fixture. User requested no video after YouTube sign-in was found missing; no upload occurred. Temporary recorder and YouTube tabs closed; viewport restored. Recording retained only in ignored local backup.
 
 Final preview https://js13kgames.com/games/nimbo visibly shows cover, new 1347-byte description, ZIP size and post-mortem link. Screenshot: workfiles/release/listing-final.jpg. Final form has Desktop/Mobile/Audio selected (not yet submitted). Hosted Play URL https://play.js13kgames.com/nimbo/ failed net::ERR_BLOCKED_BY_CLIENT; no hosted runtime pass claimed. GitHub post-mortem publication verified via repository contents API. Presentation was saved; final submission remains unperformed.
+
+## Contact and Wavedash request — 2026-09-09
+
+User requested a new private postal address and Wavedash opt-in. Existing tab 12 stopped responding on navigation (CDP mouse/focus timeouts). Reopened contact in tab 20; shipping opt-in failed to change via checkbox, label and keyboard, including after reload. Address fields remained unavailable, so no address was entered or saved. On the final section, Wavedash check succeeded; Desktop and Mobile were reselected. Navigating back to Contact again caused a CDP mouse timeout. The selected Wavedash state has not been verified as server-persisted. No final submission. Postal address intentionally omitted from repository notes.
+
+## Contact update completed — 2026-09-09
+
+After the owner restored the contact form in tab 12, filled the supplied street, apartment, postal code, city and province/country. Preserved the existing recipient name. Saved successfully (form advanced to Team), reopened Contact and verified all requested address fields. Private address values are intentionally excluded from repository notes. Returned to Submit and verified Desktop, Mobile, Wavedash and Audio all checked. Final submission was not pressed.
+
+## GitHub README media repair — 2026-09-09
+
+Inspected the live repository README in the integrated browser. All seven PNGs existed on competition-2026 and matched local bytes via GitHub Contents API; Pillow validated each file. The old cover image loaded with naturalWidth=0. Direct raw image navigation exposed GitHub CDN 503 Backend.max_conn reached responses. Reworked README with play/download links, gameplay instructions, desktop/mobile screenshots and all seven downloadable media files. Explicit image URLs and version queries refreshed the cover/desktop cached failures; checkpoint delivery remained intermittent and is presented as a file link rather than a broken inline image. Updated the post-mortem cover URL as well. Game source and ZIP unchanged. Documentation links checked locally.
