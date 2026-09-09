@@ -1,11 +1,9 @@
 {
+  "commit": "f2d4f90f2a9764290af8e12bf338efe39794a15e",
   "branch": "competition-2026",
-  "commit": "93d79fd312ce5f24e4798fb27d702d74ae8488e0",
   "remoteFilesMatchLocal": {
-    "public/nimbo.zip": "2a2d4fa03dcb8f210be6f6974631a793fa6c34a0b6c028f576d25ce5c2a24c5e",
-    "js13k/src/game.js": "1e8010ea3006f20132b056d5d33ff2759a3ea85aaa550dbfb1ff2657136e696c",
-    "js13k/src/page.html": "6710b2efcfa4244090f3973f6735b469d7d74977bc94544bf537d1e5c91422b9",
-    "js13k/src/page.css": "90904c631b2194890624cdb96719646cc99e393eb22c27fff30be4e3dce3709a",
-    "scripts/pack-js13k.mjs": "474c30a179f4f46cbfcd5daa6e92ebcbef5039beec944c4bf098b8ff53bb00fb"
+    "public/nimbo.zip": "c923536ba109279bdabd07d5b7cdc17222f1ae0dc880a8be60d2571b7a70b9b6",
+    "js13k/src/game.js": "d3a6a546015ffd6481d2a10813f8c40ab47d38a5abdf2d48481e7c1a12cb745f",
+    "js13k/src/page.html": "64ad009cf8b3119a47992ddf30b675d156e15ce70d973fadf2482240cd4a8e71"
   }
 }
