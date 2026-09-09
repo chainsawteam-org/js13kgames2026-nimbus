@@ -1,10 +1,6 @@
 {
-  "bytes": 13098,
-  "sha256": "2a2d4fa03dcb8f210be6f6974631a793fa6c34a0b6c028f576d25ce5c2a24c5e",
-  "root": [
-    "index.html"
-  ],
+  "bytes": 13158,
+  "sha256": "c923536ba109279bdabd07d5b7cdc17222f1ae0dc880a8be60d2571b7a70b9b6",
   "integrity": true,
-  "previewMatches": true,
-  "repeatPackIdentical": true
+  "previewMatches": true
 }

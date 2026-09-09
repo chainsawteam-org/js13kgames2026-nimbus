@@ -35,3 +35,8 @@ Cumulative results and final duration are appended below after completion.
 
 - Final in-app sessions: repeated practice, guided placement, visible failure and Space restart, best scores43 then72, pause freezing43, sound toggled twice, zoom100/114 and reset. Later unattended gaps intentionally/incidentally caused losses; the game does not progress indefinitely without placement input. Input automation's immediate DOM read can precede the next animation frame; re-read after the screen changes before choosing the next action.
 - Real in-app focus loss was not reproduced by opening a background tab, and physical touch hardware was unavailable. Handler regressions and browser touch emulation pass; these are coverage limitations, not evidence of physical-device acceptance.
+
+## Edge-connection mechanic verification
+- Final13158-byte entry: practice shows Connected +N; after practice the piece spawns behind the edge and requests movement right. Six Space presses from10m caused loss/restart instead of an endless path. This browser check accompanies100 randomized anti-spam simulations.
+- Chrome agent-browser0.37.1: entry start/drop,390x844 screenshot edge-mobile.png, no console errors. Firefox155.0: desktop, portrait, landscape, touch emulation, pause/sound/offline checks pass. Dev/built desktop/mobile screenshots inspected; no overflow/errors, identical smoke baseline. Higher spawns initially clipped at the top; fixed camera framing adjusted and rechecked.
+- Earlier18-minute play evidence applies to the superseded rules. This update has focused browser verification, not a fresh15-minute final-release session. Physical devices and in-app focus-loss coverage remain outstanding.

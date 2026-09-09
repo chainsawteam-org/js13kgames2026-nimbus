@@ -2,7 +2,7 @@
 
 Theme: **Unicorns and Rainbows**.
 
-Drop clouds onto the highlighted gap to extend an endless rainbow. Every piece builds permanent path. Nimbo walks automatically; cloud stacks cannot block her lane. The first three drops are untimed practice. Five touching colors are an optional fog-relief bonus.
+Drop clouds onto the highlighted gap to extend an endless rainbow. Connect each piece across the bridge edge. Nimbo walks automatically; cloud stacks cannot block her lane. The first three drops are untimed practice. Five touching colors are an optional fog-relief bonus.
 
 This folder is the **readable source** for the 13 KB competition entry.
 The main preview plays the exact competition entry. The Original studio action
@@ -53,3 +53,5 @@ Source files:
 | P / Esc — pause, M — mute | buttons |
 
 Works offline; recorded browser verification is in `../workfiles/release/`. `localStorage` key is `nimbo-rainbow-best-v1` (previous tower scores are preserved).
+
+Placement rule update: overlap the last rainbow tile and the next gap. Only Connected placements extend the path. Rotate for greater reach; disconnected drops cost fog distance. Match five touching colors to clear space and relieve fog. After the three untimed practice pieces, clouds spawn behind the bridge edge and must be moved into place.

@@ -45,3 +45,10 @@
 - Live in-app runs reached43m,27m,72m, with deliberately missed gaps, fog loss, Space restart, best-score persistence, pause/resume, mute toggles and manual zoom. A background tab creation did not reproduce a focus change, so real in-app focus-loss behavior is not claimed from that action; input-release regression tests cover the handler.
 
 - Final unchanged-artifact in-app session lasted 17.8 minutes across repeated runs, including practice dwell and live observation. Explicit pause was 11.6s; a conservative two-minute menu allowance is recorded separately. No frame-instrumented active-time claim. Final console has no warnings/errors. Preview left at a fresh untimed opening. Detailed events: release/in-app-play.json.
+
+## Checkpoint 6 — restore placement decisions
+- User demonstrated that Space-only play could build endlessly; prior usability success was not evidence of a meaningful puzzle. Previous final-artifact play evidence is superseded.
+- Connected placements must cover both the last built tile and the first gap. Rotations trade extension width against cloud placement; disconnected drops create no path and advance fog2.5m. Prisms only relieve fog on connected drops; matches clear clouds without creating disconnected bridge.
+- After practice, pieces spawn behind Nimbo instead of following the gap. New pieces start high enough to allow adjustment above accumulated clouds. Clear gravity no longer interrupts a supported bridge walk.
+- All25 tests pass, including100 randomized Space-only runs ending below20m and an intentional-placement policy progressing beyond80m. This is regression evidence, not a claim that fun is objectively proven.
+- The4,000-token task budget was exceeded investigating the placement/spawn interaction; implementation is checkpointed here.

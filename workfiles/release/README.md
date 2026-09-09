@@ -34,7 +34,7 @@ S/down soft drops; Space builds immediately. P/Escape pauses, M toggles sound.
 Touch controls provide move, rotate, soft/hard drop. Tap the board to rotate,
 swipe horizontally to nudge, or swipe down to drop.
 
-Every placed piece creates permanent rainbow beneath its columns. Fill the highlighted next gap so Nimbo can walk forward in her own lane. The first three pieces are untimed practice. Follow the placement forecast; color matches are optional. Five touching clouds of one color clear and push the fog back. Each seven-piece bag contains exactly one prism, which also relieves fog. Distance is the score. Manual zoom: +/−; 0 resets the fixed perspective view. Rainbow best scores use nimbo-rainbow-best-v1; original tower scores remain preserved.
+Only a placement spanning the bridge edge and its next gap creates rainbow. Fill the highlighted next gap so Nimbo can walk forward in her own lane. The first three pieces are untimed practice. Follow the placement forecast; color matches are optional. Five touching clouds of one color clear and push the fog back. Each seven-piece bag contains exactly one prism, which also relieves fog. Distance is the score. Manual zoom: +/−; 0 resets the fixed perspective view. Rainbow best scores use nimbo-rainbow-best-v1; original tower scores remain preserved.
 
 ## Credits and provenance
 
@@ -51,3 +51,5 @@ implied by publishing readable source.
 
 See `workfiles/audit.md`, `workfiles/agent-browser/playbook.md` and the release JSON
 files for measured verification. Competition-site saving and acceptance are deferred at the owner's request.
+
+Placement rule update: overlap the last rainbow tile and the next gap. Only Connected placements extend the path. Rotate for greater reach; disconnected drops cost fog distance. Match five touching colors to clear space and relieve fog. After the three untimed practice pieces, clouds spawn behind the bridge edge and must be moved into place.

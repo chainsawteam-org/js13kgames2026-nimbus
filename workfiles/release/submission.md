@@ -11,7 +11,7 @@ Eligibility and existing asset rights: awaiting owner confirmation
 
 One little unicorn. An endless rainbow.
 
-Drop colorful cloud pieces into the next gap and weave a rainbow for Nimbo to explore. Every piece extends the path, while five touching colors and magical prisms push back the fog. Start with three untimed practice pieces, then keep the rainbow growing.
+Drop colorful cloud pieces into the next gap and weave a rainbow for Nimbo to explore. Connected pieces extend the path, while five touching colors and magical prisms push back the fog. Start with three untimed practice pieces, then keep the rainbow growing.
 
 All models, rainbow trails, sparkles and music are generated inside the 13KB
 package. There are no downloads, accounts or external game resources.
@@ -36,3 +36,5 @@ Status: site saving and submission deferred by the owner. No organizer acceptanc
 - Signed-in competition draft uploaded and hosted play verified.
 - Owner approves competition terms and final submission at action time.
 - Organizer review recorded independently of technical readiness.
+
+Placement rule update: overlap the last rainbow tile and the next gap. Only Connected placements extend the path. Rotate for greater reach; disconnected drops cost fog distance. Match five touching colors to clear space and relieve fog. After the three untimed practice pieces, clouds spawn behind the bridge edge and must be moved into place.

@@ -264,12 +264,16 @@
     while(x<COLS && st.bridge[x])x++;
     return x;
   }
+  function connects(st,xs) {
+    const gap=nextGap(st);
+    return xs.includes(gap-1)&&xs.includes(gap);
+  }
   function spawn(st) {
     fillQ(st);
     const n = st.queue.shift();
     fillQ(st);
     const left=M.min(...SH[n.id][0].map(c=>c[0]));
-    const p={id:n.id,x:M.min(COLS-4,M.max(0,nextGap(st)-left+(st.drops>=3?1+st.drops%2:0))),y:14,rot:0,prism:n.prism};
+    const p={id:n.id,x:M.min(COLS-4,M.max(0,(st.drops<3?nextGap(st)-1-left:st.uni.x-3))),y:18,rot:0,prism:n.prism};
     st.placed++;
     if (!fits(st, p.id, p.rot, p.x, p.y)) p.y += 2;
     st.active = p;
@@ -327,19 +331,20 @@
   function lock() {
     const p = S.active;
     if (!p) return;
-    const before = reachable(S).best.x, gapBefore=nextGap(S);
+    const before = reachable(S).best.x;
     const cs = cells(p.id, p.rot, p.x, p.y);
     S.drops++;
     const columns=[...new Set(cs.map(c=>c[0]))];
-    if(S.drops>3&&!columns.includes(gapBefore))S.fog+=.5;
+    const joined=connects(S,columns);
+    if(S.drops>3)S.fog+=joined?.35:2.5;
     for(const x of columns) {
-      if(!S.bridge[x]){S.bridge[x]=1;S.woven++}
+      if(joined&&!S.bridge[x]){S.bridge[x]=1;S.woven++}
       if(cs.some(c=>c[0]===x&&c[1]>base(S,x)+4)) {
         for(const key in S.board)if(kx(key)===x)delete S.board[key];
       }
     }
     cs.forEach(([x,y],i)=>{S.board[k(x,M.min(y,base(S,x)+4))]=p.prism?RB[i%7]:PAL[p.id]});
-    if (p.prism) { S.fog -= 2.4; celebration = 1.8; blip("p"); }
+    if (p.prism && joined) { S.fog -= 2.4; celebration = 1.8; blip("p"); }
     blip("l");
     trauma = M.min(1, trauma + 0.22);
     S.active = null;
@@ -374,7 +379,7 @@
     return a && b && a[0] === b[0] && a[1] === b[1] && a[2] === b[2];
   }
 
-  // Touching groups follow the curve; merges weave permanent rainbow below.
+  // Touching groups clear cloud space; only connected placements extend the road.
   function findKills(st, extra) {
     const board={...st.board,...extra},seen={},kill=[];
     for(const key in board) {
@@ -402,7 +407,7 @@
       }
       colors.forEach((c,i)=>st.board[k(x,floorAt(st,x)+i)]=c);
     }
-    beginFall(st);
+    if(!st.hopT&&!walk(st,st.uni.x,st.uni.y))beginFall(st);
   }
 
   // Clouds can disappear during a hop. Fall where Nimbo actually is,
@@ -440,7 +445,6 @@
     }
     if (S.popT > 0) return 1;
     S.pop.forEach((key)=>{
-      const x=kx(key);if(!S.bridge[x]){S.bridge[x]=1;S.woven++}
       delete S.board[key];
     });
     S.pop = null;
@@ -869,10 +873,10 @@
     if(mode==='paused')dt=0;
     scrollEase*=M.exp(-5*dt);
     const aspect=innerWidth/innerHeight;
-    const dist=M.max(31,29/(2*M.tan(M.PI/9)*aspect))*zoom;
+    const dist=M.max(33,29/(2*M.tan(M.PI/9)*aspect))*zoom;
     // Fixed isometric orientation with a perspective lens. Only the road scrolls.
     const ry=22*M.PI/180,rx=24*M.PI/180;
-    W.camera({x:M.sin(ry)*dist,y:11+M.sin(rx)*M.cos(ry)*dist,z:M.cos(rx)*M.cos(ry)*dist,rx:-24,ry:22,fov:40});
+    W.camera({x:M.sin(ry)*dist,y:12+M.sin(rx)*M.cos(ry)*dist,z:M.cos(rx)*M.cos(ry)*dist,rx:-24,ry:22,fov:40});
     const dusk=M.min(1,S.height/150);
     W.clearColor([.82-dusk*.08,.77-dusk*.09,.95-dusk*.025]);
     for(let j=0;j<6;j++)W.move({n:'mist'+j,x:wx(S.fog)-5+M.sin(j)*2,y:2+(j%3)*4,z:-2-j*.3});
@@ -896,8 +900,8 @@
     if(p){gy=ghostY(S);cells(p.id,p.rot,p.x,gy).forEach(([x,y],j)=>extra[k(x,y)]=p.prism?RB[j%7]:PAL[p.id])}
     const pending=p?findKills(S,extra):[],hot={};pending.forEach(key=>hot[key]=1);
     const added=[...new Set(Object.keys(extra).map(kx))].filter(x=>!S.bridge[x]).length;
-    const xs=Object.keys(extra).map(kx),gap=nextGap(S),miss=gap<COLS&&!xs.includes(gap);
-    const forecast='<b>'+(miss?(M.min(...xs)>gap?'← Move left to fill the gap':'Move right to fill the gap →'):added?'Build '+added+' new rainbow tiles':'Already built · Wait for Nimbo')+'</b><span>'+(S.drops<3?'Press SPACE or BUILD · Move with ← →':pending.length?pending.length+' matching clouds: bonus fog relief':'SPACE / BUILD to place · Matching 5 is a bonus')+'</span>';
+    const xs=Object.keys(extra).map(kx),gap=nextGap(S),joined=connects(S,xs);
+    const forecast='<b>'+(joined?'Connected · +'+added+' rainbow tiles':M.max(...xs)<gap?'Move right to the rainbow edge →':M.min(...xs)>=gap?'← Overlap the last rainbow tile':'Rotate to span the edge + gap')+'</b><span>'+(S.drops<3?'Practice · Connect, then SPACE / BUILD':pending.length?pending.length+' matching clouds: clear + fog relief':joined?'Wider pieces go farther · BUILD':'Disconnected drops cost fog distance')+'</span>';
     if(forecast!==forecastText){forecastText=forecast;$('forecast').innerHTML=forecast}
     // Draw the complete construction window, including unfilled rainbow gaps.
     for(let x=0;x<COLS;x++) {

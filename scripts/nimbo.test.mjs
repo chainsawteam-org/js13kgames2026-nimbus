@@ -11,7 +11,7 @@ function game(saved={}) {
   const node=()=>({gain:{value:0,setTargetAtTime(){},setValueAtTime(){},exponentialRampToValueAtTime(){}},frequency:{value:0,setValueAtTime(){},exponentialRampToValueAtTime(){}},connect(){},disconnect(){},start(t){notes.push(t)},stop(){}});
   class Audio {currentTime=0;state='running';destination={};createGain=node;createOscillator=node;suspend(){this.state='suspended'}resume(){this.state='running';return Promise.resolve()}}
   const context=vm.createContext({Math,Number,matchMedia:()=>({matches:false}),innerWidth:1280,innerHeight:800,devicePixelRatio:1,document:{hidden:false,getElementById:id=>elements[id]??=element()},localStorage:{getItem:k=>saved[k],setItem:(k,v)=>saved[k]=v},window:{AudioContext:Audio},DOMMatrix:class{},performance:{now:()=>0}});
-  const exposed='S,reset,fillQ,k,kx,ky,PAL,SH,fits,move,rotate,hard,onKey,hold,pause,resume,play,grav,repath,tickUni,tick,findKills,tickPop,startPop,tickPiece,unlock,toggleMute,musicTick,syncScene,buildScene,nodes,W,releaseInputs,boom,bindPad,base,floorAt,ghostY,changeZoom,walk';
+  const exposed='S,reset,fillQ,k,kx,ky,PAL,SH,fits,move,rotate,hard,onKey,hold,pause,resume,play,grav,repath,tickUni,tick,findKills,tickPop,startPop,tickPiece,unlock,toggleMute,musicTick,syncScene,buildScene,nodes,W,releaseInputs,boom,bindPad,base,floorAt,ghostY,changeZoom,walk,nextGap,connects,cells';
   vm.runInContext(source.slice(0,source.indexOf('  resize();\n  W.reset();'))+`const S=reset('play');this.api={${exposed},mode:()=>mode,audio:()=>AC,master:()=>master,sparksCount:()=>sparks.length};})();`,context);
   return {...context.api,elements,notes,saved};
 }
@@ -44,11 +44,11 @@ test('landing forecast finds the same merge without mutating the board',()=>{
  const g=game();g.S.board={};for(let x=8;x<12;x++)g.S.board[g.k(x,11)]=g.PAL[1];
  const before=JSON.stringify(g.S.board),extra={[g.k(12,11)]:g.PAL[1]};assert.equal(g.findKills(g.S,extra).length,5);assert.equal(JSON.stringify(g.S.board),before);
 });
-test('a merge weaves permanent rainbow and preserves clouds above it',()=>{
+test('a merge clears cloud space without creating disconnected rainbow',()=>{
  const g=game();g.S.bridge={};g.S.board={};g.S.active=null;
  for(let x=8;x<13;x++)g.S.board[g.k(x,11)]=g.PAL[0];g.S.board[g.k(10,12)]=g.PAL[2];
  g.startPop(g.findKills(g.S));g.tickPop(.6);
- assert.equal(g.S.woven,5);for(let x=8;x<13;x++)assert.equal(g.S.bridge[x],1);
+ assert.equal(g.S.woven,0);for(let x=8;x<13;x++)assert.equal(g.S.bridge[x],undefined);
  assert.equal(Object.keys(g.S.board).length,1);assert.ok(g.S.board[g.k(10,g.floorAt(g.S,10))]);assert.ok(g.S.active);assert.ok(g.S.fog<-5.5);
 });
 test('gravity settles each column on the curved road without duplicating clouds',()=>{
@@ -123,6 +123,27 @@ test('first three pieces wait without fog pressure or automatic locking',()=>{
 test('default beginner placements extend the road without requiring a color match',()=>{
  for(let run=0;run<30;run++){
   const g=game();for(let n=0;n<3;n++){const woven=g.S.woven;g.hard();assert.ok(g.S.woven>woven)}
-  g.S.active=null;for(let i=0;i<1000;i++)g.tickUni(1/60);assert.ok(g.S.height>=9);assert.equal(g.mode(),'playing');
+  g.S.active=null;for(let i=0;i<1000;i++)g.tickUni(1/60);assert.ok(g.S.height>=6);assert.equal(g.mode(),'playing');
  }
+});
+
+test('Space-only spam cannot extend an endless road or farm prism relief',()=>{
+ for(let run=0;run<100;run++){
+  const g=game();let drops=0;
+  while(g.mode()==='playing'&&drops++<150){if(g.S.pop)g.tickPop(1);else g.hard();for(let t=0;t<12;t++)g.tick(1/60)}
+  assert.equal(g.mode(),'over');assert.ok(g.S.height<20);
+ }
+});
+test('rotation and edge overlap are required; isolated drops create no path',()=>{
+ const g=game();g.S.drops=3;g.S.active={id:0,rot:0,x:14,y:18,prism:true};const woven=g.S.woven,fog=g.S.fog;g.hard();assert.equal(g.S.woven,woven);assert.ok(g.S.fog>fog);
+ assert.equal(g.connects(g.S,[5,6]),false);assert.equal(g.connects(g.S,[4]),false);assert.equal(g.connects(g.S,[4,5]),true);
+});
+test('deliberate connected placements can traverse multiple rainbow sections',()=>{
+ const g=game();for(let n=0;n<80&&g.mode()==='playing';n++){
+  if(g.S.pop)g.tickPop(1);
+  const p=g.S.active;let found=false;
+  for(let r=0;r<4&&!found;r++)for(let x=0;x<21&&!found;x++)if(g.fits(g.S,p.id,r,x,18)&&g.connects(g.S,g.cells(p.id,r,x,18).map(c=>c[0]))){Object.assign(p,{rot:r,x,y:18});found=true}
+  assert.ok(found);g.hard();for(let t=0;t<90;t++)g.tick(1/60);
+ }
+ assert.equal(g.mode(),'playing',JSON.stringify({height:g.S.height,fog:g.S.fog,uni:g.S.uni,gap:g.nextGap(g.S)}));assert.ok(g.S.height>80);
 });

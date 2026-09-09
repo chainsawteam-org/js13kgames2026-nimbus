@@ -10,7 +10,7 @@
     {
       "at": 1788923121315,
       "event": "Second practice build",
-      "text": "Pause\nSound on\nRAINBOW JOURNEY\n5 m\nBEST 0 m\n×2\nCOMING UP\nPractice 3/3 · No time limit\nNimbo follows your rainbow automatically\nBuild 4 new rainbow tiles\nPress SPACE or BUILD · Move with ← →\n−\n100%\n+\n←\n→\n↻\n↓\nBUILD"
+      "text": "Pause\nSound on\nRAINBOW JOURNEY\n5 m\nBEST 0 m\n\u00d72\nCOMING UP\nPractice 3/3 \u00b7 No time limit\nNimbo follows your rainbow automatically\nBuild 4 new rainbow tiles\nPress SPACE or BUILD \u00b7 Move with \u2190 \u2192\n\u2212\n100%\n+\n\u2190\n\u2192\n\u21bb\n\u2193\nBUILD"
     },
     {
       "at": 1788923155310,
@@ -23,12 +23,12 @@
     {
       "at": 1788923214160,
       "event": "Recovered at 21m; mute toggle twice",
-      "text": "Pause\nSound on\nRAINBOW JOURNEY\n23 m\nBEST 0 m\nCOMING UP\nFog behind · 10.8 m\nFill the bright outline to help Nimbo\n20 m · Follow your rainbow\n← Move left to fill the gap\nSPACE / BUILD to place · Matching 5 is a bonus\n−\n114%\n+\n←\n→\n↻\n↓\nBUILD"
+      "text": "Pause\nSound on\nRAINBOW JOURNEY\n23 m\nBEST 0 m\nCOMING UP\nFog behind \u00b7 10.8 m\nFill the bright outline to help Nimbo\n20 m \u00b7 Follow your rainbow\n\u2190 Move left to fill the gap\nSPACE / BUILD to place \u00b7 Matching 5 is a bonus\n\u2212\n114%\n+\n\u2190\n\u2192\n\u21bb\n\u2193\nBUILD"
     },
     {
       "at": 1788923242718,
       "event": "Followed visible forecast for 12 input steps",
-      "text": "Pause\nSound on\nRAINBOW JOURNEY\n23 m\nBEST 0 m\nCOMING UP\nFog behind · 4.0 m\nNimbo follows your rainbow automatically\n20 m · Follow your rainbow\n← Move left to fill the gap\nSPACE / BUILD to place · Matching 5 is a bonus\n−\n114%\n+\n←\n→\n↻\n↓\nBUILD"
+      "text": "Pause\nSound on\nRAINBOW JOURNEY\n23 m\nBEST 0 m\nCOMING UP\nFog behind \u00b7 4.0 m\nNimbo follows your rainbow automatically\n20 m \u00b7 Follow your rainbow\n\u2190 Move left to fill the gap\nSPACE / BUILD to place \u00b7 Matching 5 is a bonus\n\u2212\n114%\n+\n\u2190\n\u2192\n\u21bb\n\u2193\nBUILD"
     },
     {
       "at": 1788923294685,
@@ -38,7 +38,7 @@
     {
       "at": 1788923308050,
       "event": "Deliberately placed 18 pieces away from next gap to test failure",
-      "text": "Pause\nSound on\nRAINBOW JOURNEY\n43 m\nBEST 0 m\nCOMING UP\nFog behind · 3.3 m\nFill the bright outline to help Nimbo\n40 m · Follow your rainbow\n← Move left to fill the gap\nSPACE / BUILD to place · Matching 5 is a bonus\n−\n114%\n+\n←\n→\n↻\n↓\nBUILD"
+      "text": "Pause\nSound on\nRAINBOW JOURNEY\n43 m\nBEST 0 m\nCOMING UP\nFog behind \u00b7 3.3 m\nFill the bright outline to help Nimbo\n40 m \u00b7 Follow your rainbow\n\u2190 Move left to fill the gap\nSPACE / BUILD to place \u00b7 Matching 5 is a bonus\n\u2212\n114%\n+\n\u2190\n\u2192\n\u21bb\n\u2193\nBUILD"
     },
     {
       "at": 1788923330993,
@@ -47,7 +47,7 @@
     {
       "at": 1788923385249,
       "event": "Second run follow forecast after live wait",
-      "text": "Pause\nSound on\nRAINBOW JOURNEY\n21 m\nBEST 43 m\nCOMING UP\nFog behind · 5.8 m\nFill the bright outline to help Nimbo\n20 m · Follow your rainbow\n← Move left to fill the gap\nSPACE / BUILD to place · Matching 5 is a bonus\n−\n114%\n+\n←\n→\n↻\n↓\nBUILD"
+      "text": "Pause\nSound on\nRAINBOW JOURNEY\n21 m\nBEST 43 m\nCOMING UP\nFog behind \u00b7 5.8 m\nFill the bright outline to help Nimbo\n20 m \u00b7 Follow your rainbow\n\u2190 Move left to fill the gap\nSPACE / BUILD to place \u00b7 Matching 5 is a bonus\n\u2212\n114%\n+\n\u2190\n\u2192\n\u21bb\n\u2193\nBUILD"
     },
     {
       "at": 1788923397650,
@@ -56,7 +56,7 @@
     {
       "at": 1788923463182,
       "event": "Second run continued with visible guidance",
-      "text": "Sound on\n20 m · Follow your rainbow\n−\n114%\n+\nUNTIL THE NEXT RAINBOW\nEvery rainbow goes somewhere.\n\nThe path ended. Fill the gaps and stay ahead of the fog.\n\n27 metres\n\nBest climb: 43 m\n\nWeave again →"
+      "text": "Sound on\n20 m \u00b7 Follow your rainbow\n\u2212\n114%\n+\nUNTIL THE NEXT RAINBOW\nEvery rainbow goes somewhere.\n\nThe path ended. Fill the gaps and stay ahead of the fog.\n\n27 metres\n\nBest climb: 43 m\n\nWeave again \u2192"
     },
     {
       "at": 1788923494986,
@@ -69,7 +69,7 @@
     {
       "at": 1788923617948,
       "event": "Third run live observation",
-      "text": "Pause\nSound on\nRAINBOW JOURNEY\n61 m\nBEST 43 m\nCOMING UP\nFog is close! Build the next gap\nFill the bright outline to help Nimbo\n60 m · Follow your rainbow\nBuild 1 new rainbow tiles\nSPACE / BUILD to place · Matching 5 is a bonus\n−\n100%\n+\n←\n→\n↻\n↓\nBUILD"
+      "text": "Pause\nSound on\nRAINBOW JOURNEY\n61 m\nBEST 43 m\nCOMING UP\nFog is close! Build the next gap\nFill the bright outline to help Nimbo\n60 m \u00b7 Follow your rainbow\nBuild 1 new rainbow tiles\nSPACE / BUILD to place \u00b7 Matching 5 is a bonus\n\u2212\n100%\n+\n\u2190\n\u2192\n\u21bb\n\u2193\nBUILD"
     },
     {
       "at": 1788923631966,
@@ -78,7 +78,7 @@
     {
       "at": 1788923696869,
       "event": "Late-run observation and gap repair",
-      "text": "Pause\nSound on\nRAINBOW JOURNEY\n0 m\nBEST 72 m\nCOMING UP\n−\n100%\n+\n←\n→\n↻\n↓\nBUILD"
+      "text": "Pause\nSound on\nRAINBOW JOURNEY\n0 m\nBEST 72 m\nCOMING UP\n\u2212\n100%\n+\n\u2190\n\u2192\n\u21bb\n\u2193\nBUILD"
     },
     {
       "at": 1788923715522,
@@ -91,12 +91,12 @@
     {
       "at": 1788923849453,
       "event": "Fourth run fixed-camera desktop check",
-      "text": "Pause\nSound on\nRAINBOW JOURNEY\n18 m\nBEST 72 m\nCOMING UP\nFog behind · 4.4 m\nNimbo follows your rainbow automatically\n10 m · Follow your rainbow\n← Move left to fill the gap\nSPACE / BUILD to place · Matching 5 is a bonus\n−\n100%\n+\n←\n→\n↻\n↓\nBUILD"
+      "text": "Pause\nSound on\nRAINBOW JOURNEY\n18 m\nBEST 72 m\nCOMING UP\nFog behind \u00b7 4.4 m\nNimbo follows your rainbow automatically\n10 m \u00b7 Follow your rainbow\n\u2190 Move left to fill the gap\nSPACE / BUILD to place \u00b7 Matching 5 is a bonus\n\u2212\n100%\n+\n\u2190\n\u2192\n\u21bb\n\u2193\nBUILD"
     },
     {
       "at": 1788923914514,
       "event": "Fourth run continued with only visible controls",
-      "text": "Pause\nSound on\nRAINBOW JOURNEY\n0 m\nBEST 72 m\nCOMING UP\n−\n100%\n+\n←\n→\n↻\n↓\nBUILD"
+      "text": "Pause\nSound on\nRAINBOW JOURNEY\n0 m\nBEST 72 m\nCOMING UP\n\u2212\n100%\n+\n\u2190\n\u2192\n\u21bb\n\u2193\nBUILD"
     },
     {
       "at": 1788923994794,
@@ -105,12 +105,13 @@
     {
       "at": 1788924047725,
       "event": "Fifth run live placement and timing check",
-      "text": "Pause\nSound on\nRAINBOW JOURNEY\n0 m\nBEST 72 m\nCOMING UP\n−\n100%\n+\n←\n→\n↻\n↓\nBUILD"
+      "text": "Pause\nSound on\nRAINBOW JOURNEY\n0 m\nBEST 72 m\nCOMING UP\n\u2212\n100%\n+\n\u2190\n\u2192\n\u21bb\n\u2193\nBUILD"
     },
     {
       "at": 1788924171108,
       "event": "Final controls verified; zero browser warnings/errors"
     }
   ],
-  "console": []
+  "console": [],
+  "supersededBy": "Edge-connection mechanic; previous session is not final-artifact acceptance"
 }
