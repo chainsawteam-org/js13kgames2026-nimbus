@@ -1,0 +1,49 @@
+{
+  "version": "155.0",
+  "url": "http://127.0.0.1:8082/",
+  "viewports": [
+    {
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "errors": [],
+      "external": [],
+      "requests": [
+        "http://127.0.0.1:8082/"
+      ],
+      "height": "4",
+      "overflow": false,
+      "offlineInput": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "errors": [],
+      "external": [],
+      "requests": [
+        "http://127.0.0.1:8082/"
+      ],
+      "height": "4",
+      "overflow": false,
+      "offlineInput": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "errors": [],
+      "external": [],
+      "requests": [
+        "http://127.0.0.1:8082/"
+      ],
+      "height": "2",
+      "overflow": false,
+      "offlineInput": true
+    }
+  ],
+  "ok": true
+}
