@@ -4,8 +4,8 @@ Name: Nimbo
 Categories: Desktop, Mobile
 Source: https://github.com/chainsawteam-org/js13kgames2026-nimbus
 Package: public/nimbo.zip
-Author/team: awaiting owner confirmation
-Eligibility and existing asset rights: awaiting owner confirmation
+Author/team: contact and team steps completed by owner in the signed-in form
+Eligibility and rights: no new declaration made in this media pass
 
 ## Description
 
@@ -58,3 +58,15 @@ Short description: Build rainbow cloud stairs, save glowing checkpoints, and gui
 Platform: Web / HTML5 / WebGL2. Single player. Desktop keyboard and mobile touch. Offline after loading; no external runtime resources.
 
 Computer Use reached the registration page, but currently returns an empty accessibility tree and no screenshot. No fields or upload success have been claimed. Image dimension requirements must be confirmed against the readable form before uploading.
+
+## Live registration — 2026-09-09
+
+Registered Nimbo as a draft through the signed-in Codex browser at https://js13kgames.com/submit. Repository and title accepted. Registration step complete; Contact step requires a postal address while physical-prize opt-in is checked. User choice on physical shipments, public author credit and creation-period confirmation is pending. Later form sections remain gated. No ZIP/media upload or final submission is claimed.
+
+## Presentation update — 2026-09-09
+
+ZIP upload saved successfully: 13095 / 13312 bytes. Contact, Team, Game and Presentation steps are complete in the live form. Correct PNG listing-thumbnail.png (320x320) and listing-cover.png (800x500) uploaded and accepted. Stronger English description prepared. Development post-mortem: workfiles/release/post-mortem.md.
+
+A local 18-second gameplay recording with synthesized audio was captured, including an explicitly staged checkpoint demonstration. Owner then requested no video; no YouTube upload, video listing or public recording is included. The capture remains only in the ignored local backup.
+
+The archive and game source are unchanged by this presentation pass. No final competition submission or organizer acceptance is claimed.

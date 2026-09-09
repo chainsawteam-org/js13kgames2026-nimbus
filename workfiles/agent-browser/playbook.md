@@ -78,3 +78,11 @@ Cumulative results and final duration are appended below after completion.
 - Actual game: open /, start, move right, Space, screenshot1280x800; repeat390x844 with touch buttons. All five media images visually inspected. Their staged/gameplay distinctions are listed in public/press/index.html.
 - Computer Use attempted the live registration page in the user Chrome. User tab changes initially interrupted actions; after Chrome was released, the page title was Registration | js13kGames 2026 but AX content was empty and screenshot null. Form remains unfilled pending restored visibility.
 - Clean static-server smoke: fresh nimbo-verify Chrome session,1280x800, snapshot, click Let’s climb, d, Space, resize390x844; both screenshots inspected, error list empty. A click before viewport refresh was covered by canvas and was retried from a fresh snapshot.
+
+- Codex browser registration: reused signed-in submit tab, entered repository and Nimbo title, read official rules, saved registration; Contact step displayed. Attempted Game navigation stayed at Contact. Physical-prize/address choice requested from owner; later steps remain gated.
+
+## In-app listing/media — 2026-09-09
+
+User explicitly selected the Codex browser. Connected in-app runtime used for https://js13kgames.com/submit: uploaded ZIP through file chooser; saved Presentation with accepted exact-size PNG files. Browser screenshots returned JPEG bytes, so PNG encoding was corrected before upload. ZIP accepted at 13095 bytes. Contact and Team had been completed by owner.
+
+Local recorder on 8083 captured actual WebGL canvas and Web Audio, including a staged checkpoint fixture. User requested no video after YouTube sign-in was found missing; no upload occurred. Temporary recorder and YouTube tabs closed; viewport restored. Recording retained only in ignored local backup.
