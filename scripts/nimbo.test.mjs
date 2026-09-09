@@ -31,6 +31,16 @@ test('rotations and hard drops stay in bounds and never overwrite occupied cloud
    g.hard();assert.equal(Object.keys(g.S.board).length,4);
  }
 });
+test('a piece can land above Nimbo without killing or overwriting her support',()=>{
+ const g=game();
+ g.S.board[g.k(1,0)]=g.PAL[0];
+ g.S.uni={x:1,y:0,vx:1,vy:0,max:0};
+ g.S.active={id:0,x:1,y:5,rot:0,prism:false};
+ g.hard();
+ assert.equal(g.mode(),'playing');
+ assert.ok(Object.keys(g.S.board).some(key=>Math.floor(+key/16)>0&&(+key%16)===1));
+ assert.equal(g.S.board[g.k(1,0)],g.PAL[0]);
+});
 test('five aligned colors clear, four do not; a full mixed row clears',()=>{
  const g=game();g.S.board={};for(let x=0;x<4;x++)g.S.board[g.k(x,0)]=g.PAL[0];assert.equal(g.findKills(g.S).length,0);
  g.S.board[g.k(4,0)]=g.PAL[0];assert.equal(g.findKills(g.S).length,5);

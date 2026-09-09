@@ -281,6 +281,17 @@
     return y;
   }
 
+  // Nimbo is a rider, not a solid obstacle. If a falling piece reaches her
+  // cell, lift the piece until its footprint is safely above her before lock.
+  // Existing cloud cells remain solid through fits(), so this cannot overwrite
+  // the support she is standing on.
+  function liftAboveUnicorn(st, p) {
+    const ux = M.round(st.uni.x), uy = st.uni.y;
+    let guard = 0;
+    while (guard++ < 8 && cells(p.id, p.rot, p.x, p.y).some(([x, y]) => x === ux && y <= uy)) p.y++;
+    return fits(st, p.id, p.rot, p.x, p.y);
+  }
+
   function move(dx) {
     if (mode !== "playing" || !S.active) return;
     const p = S.active;
@@ -307,6 +318,7 @@
   function hard() {
     if (mode !== "playing" || !S.active) return;
     while (fits(S, S.active.id, S.active.rot, S.active.x, S.active.y - 1)) S.active.y--;
+    liftAboveUnicorn(S, S.active);
     blip("h");
     trauma = M.min(1, trauma + 0.28);
     lock();
@@ -521,7 +533,7 @@
     }
     if (!fits(S, p.id, p.rot, p.x, p.y - 1)) {
       S.lockT += dt;
-      if (S.lockT >= 0.5 || S.lockN >= 15) lock();
+      if (S.lockT >= 0.5 || S.lockN >= 15) { liftAboveUnicorn(S, p); lock(); }
     } else S.lockT = 0;
   }
 

@@ -59,3 +59,8 @@
 - Rainbow gameplay verification is historical and does not describe the restored rules. Fresh restore checks follow below.
 
 - Restore verified:16/16 engine tests, typecheck, full build, desktop/mobile dev+built rendering, Firefox155.0 input/offline checks. ZIP11977bytes exactly matches0c1e875. In-app movement/rotation/drop/climb/pause verified. Further engine work stays within tower stacking; no new bridge rules remain.
+## Checkpoint 8 — safe drops over Nimbo
+- Fixed the reported death/placement edge case: Nimbo is treated as a rider while a piece is falling. If the piece reaches her column, the lock step lifts it above her before committing it; occupied cloud cells remain solid and cannot be overwritten.
+- Added a regression covering a drop above Nimbo's support. All17 gameplay tests pass, including clears, support loss, fog failure, restart, input release and audio resumption.
+- Final pack is 12032 bytes (1280 bytes spare), under the 13312-byte limit. Typecheck, production build, and dev desktop/mobile smoke checks pass with zero console/page errors and no horizontal overflow.
+- Browser spot check started the game, moved, rotated and hard-dropped a piece; console remained clean. The rule is also exercised deterministically by the new regression test.
