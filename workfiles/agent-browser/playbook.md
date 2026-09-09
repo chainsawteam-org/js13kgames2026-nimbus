@@ -32,3 +32,6 @@ Cumulative results and final duration are appended below after completion.
 - Development and production smoke match, no overflow/errors, full-resolution canvas. Read both desktop/mobile screenshots; live UI is visible and legible.
 
 - Brand-only session nimbo-brand-assets: staged procedural SVGs opened with --allow-file-access, viewport set after opening, screenshots 1200x630 and1200x264, visual inspection and JPEG read-back passed. Updated og.jpg/x-banner.jpg to Follow the rainbow; no competition runtime changes. Session closed. Evidence screenshots/brand-og-rainbow.png and brand-x-banner-rainbow.png.
+
+- Final in-app sessions: repeated practice, guided placement, visible failure and Space restart, best scores43 then72, pause freezing43, sound toggled twice, zoom100/114 and reset. Later unattended gaps intentionally/incidentally caused losses; the game does not progress indefinitely without placement input. Input automation's immediate DOM read can precede the next animation frame; re-read after the screen changes before choosing the next action.
+- Real in-app focus loss was not reproduced by opening a background tab, and physical touch hardware was unavailable. Handler regressions and browser touch emulation pass; these are coverage limitations, not evidence of physical-device acceptance.

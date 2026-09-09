@@ -1,24 +1,116 @@
-[
-  {
-    "time": "2026-09-09T02:33:49Z",
-    "event": "Final ZIP 9d469733 loaded and game started"
-  },
-  {
-    "time": "2026-09-09T02:36:12.142Z",
-    "screen": "Pause\nSound on\nYOUR CLIMB\n32 m\nBEST 91 m\nCOMING UP\nRoom to breathe · 31.3 m\nBuild within 1 across / 2 up\n30 m · A little closer to the stars"
-  },
-  {
-    "time": "2026-09-09T02:36:39.942Z",
-    "event": "Rotate, steer, hard drop; sound on",
-    "screen": "Pause\nSound on\nYOUR CLIMB\n40 m\nBEST 91 m\nCOMING UP\nRoom to breathe · 33.0 m\nFollow the golden stepping stones\n40 m · A little closer to the stars"
-  },
-  {
-    "time": "2026-09-09T02:37:37.221Z",
-    "event": "Connected stair placements",
-    "screen": "Pause\nSound on\nYOUR CLIMB\n63 m\nBEST 91 m\n×2\nCOMING UP\nRoom to breathe · 43.3 m\nFollow the golden stepping stones\n60 m · A little closer to the stars"
-  },
-  {
-    "time": "2026-09-09T02:42:34.911Z",
-    "event": "Superseded by rainbow bridge redesign"
-  }
-]
+{
+  "artifactSha256": "2a2d4fa03dcb8f210be6f6974631a793fa6c34a0b6c028f576d25ce5c2a24c5e",
+  "startedAt": "2026-09-09T03:05:03.731Z",
+  "endedAt": "2026-09-09T03:22:51.108Z",
+  "wallMinutes": 17.789616666666667,
+  "explicitPausedMs": 11574,
+  "menuAllowanceMs": 120000,
+  "note": "Live browser sessions included untimed practice dwell, timed runs, failure, restart and observation intervals; menu allowance is conservative, not instrumented active-time telemetry.",
+  "events": [
+    {
+      "at": 1788923121315,
+      "event": "Second practice build",
+      "text": "Pause\nSound on\nRAINBOW JOURNEY\n5 m\nBEST 0 m\n×2\nCOMING UP\nPractice 3/3 · No time limit\nNimbo follows your rainbow automatically\nBuild 4 new rainbow tiles\nPress SPACE or BUILD · Move with ← →\n−\n100%\n+\n←\n→\n↻\n↓\nBUILD"
+    },
+    {
+      "at": 1788923155310,
+      "event": "Three untimed builds; followed move-left forecast for fourth"
+    },
+    {
+      "at": 1788923193253,
+      "event": "Filled stalled gap and tested zoom"
+    },
+    {
+      "at": 1788923214160,
+      "event": "Recovered at 21m; mute toggle twice",
+      "text": "Pause\nSound on\nRAINBOW JOURNEY\n23 m\nBEST 0 m\nCOMING UP\nFog behind · 10.8 m\nFill the bright outline to help Nimbo\n20 m · Follow your rainbow\n← Move left to fill the gap\nSPACE / BUILD to place · Matching 5 is a bonus\n−\n114%\n+\n←\n→\n↻\n↓\nBUILD"
+    },
+    {
+      "at": 1788923242718,
+      "event": "Followed visible forecast for 12 input steps",
+      "text": "Pause\nSound on\nRAINBOW JOURNEY\n23 m\nBEST 0 m\nCOMING UP\nFog behind · 4.0 m\nNimbo follows your rainbow automatically\n20 m · Follow your rainbow\n← Move left to fill the gap\nSPACE / BUILD to place · Matching 5 is a bonus\n−\n114%\n+\n←\n→\n↻\n↓\nBUILD"
+    },
+    {
+      "at": 1788923294685,
+      "event": "Pause froze distance at 43m; resumed",
+      "pausedMs": 11574
+    },
+    {
+      "at": 1788923308050,
+      "event": "Deliberately placed 18 pieces away from next gap to test failure",
+      "text": "Pause\nSound on\nRAINBOW JOURNEY\n43 m\nBEST 0 m\nCOMING UP\nFog behind · 3.3 m\nFill the bright outline to help Nimbo\n40 m · Follow your rainbow\n← Move left to fill the gap\nSPACE / BUILD to place · Matching 5 is a bonus\n−\n114%\n+\n←\n→\n↻\n↓\nBUILD"
+    },
+    {
+      "at": 1788923330993,
+      "event": "Fog loss at 43m; subsequent Space restarted, best43 preserved"
+    },
+    {
+      "at": 1788923385249,
+      "event": "Second run follow forecast after live wait",
+      "text": "Pause\nSound on\nRAINBOW JOURNEY\n21 m\nBEST 43 m\nCOMING UP\nFog behind · 5.8 m\nFill the bright outline to help Nimbo\n20 m · Follow your rainbow\n← Move left to fill the gap\nSPACE / BUILD to place · Matching 5 is a bonus\n−\n114%\n+\n←\n→\n↻\n↓\nBUILD"
+    },
+    {
+      "at": 1788923397650,
+      "event": "Rotation/reverse and left/right controls checked in second run"
+    },
+    {
+      "at": 1788923463182,
+      "event": "Second run continued with visible guidance",
+      "text": "Sound on\n20 m · Follow your rainbow\n−\n114%\n+\nUNTIL THE NEXT RAINBOW\nEvery rainbow goes somewhere.\n\nThe path ended. Fill the gaps and stay ahead of the fog.\n\n27 metres\n\nBest climb: 43 m\n\nWeave again →"
+    },
+    {
+      "at": 1788923494986,
+      "event": "Run three after failure at 27m; conservative menu exclusion applied"
+    },
+    {
+      "at": 1788923521457,
+      "event": "Restart confirmed: first untimed piece, distance3 from starter path, best43"
+    },
+    {
+      "at": 1788923617948,
+      "event": "Third run live observation",
+      "text": "Pause\nSound on\nRAINBOW JOURNEY\n61 m\nBEST 43 m\nCOMING UP\nFog is close! Build the next gap\nFill the bright outline to help Nimbo\n60 m · Follow your rainbow\nBuild 1 new rainbow tiles\nSPACE / BUILD to place · Matching 5 is a bonus\n−\n100%\n+\n←\n→\n↻\n↓\nBUILD"
+    },
+    {
+      "at": 1788923631966,
+      "event": "Third run reached61m; close-fog warning visible"
+    },
+    {
+      "at": 1788923696869,
+      "event": "Late-run observation and gap repair",
+      "text": "Pause\nSound on\nRAINBOW JOURNEY\n0 m\nBEST 72 m\nCOMING UP\n−\n100%\n+\n←\n→\n↻\n↓\nBUILD"
+    },
+    {
+      "at": 1788923715522,
+      "event": "Third run ended72m, new best; fourth run begins"
+    },
+    {
+      "at": 1788923777957,
+      "event": "Fourth run: untimed third-piece dwell, then BUILD"
+    },
+    {
+      "at": 1788923849453,
+      "event": "Fourth run fixed-camera desktop check",
+      "text": "Pause\nSound on\nRAINBOW JOURNEY\n18 m\nBEST 72 m\nCOMING UP\nFog behind · 4.4 m\nNimbo follows your rainbow automatically\n10 m · Follow your rainbow\n← Move left to fill the gap\nSPACE / BUILD to place · Matching 5 is a bonus\n−\n100%\n+\n←\n→\n↻\n↓\nBUILD"
+    },
+    {
+      "at": 1788923914514,
+      "event": "Fourth run continued with only visible controls",
+      "text": "Pause\nSound on\nRAINBOW JOURNEY\n0 m\nBEST 72 m\nCOMING UP\n−\n100%\n+\n←\n→\n↻\n↓\nBUILD"
+    },
+    {
+      "at": 1788923994794,
+      "event": "Fifth run completed three untimed practice pieces"
+    },
+    {
+      "at": 1788924047725,
+      "event": "Fifth run live placement and timing check",
+      "text": "Pause\nSound on\nRAINBOW JOURNEY\n0 m\nBEST 72 m\nCOMING UP\n−\n100%\n+\n←\n→\n↻\n↓\nBUILD"
+    },
+    {
+      "at": 1788924171108,
+      "event": "Final controls verified; zero browser warnings/errors"
+    }
+  ],
+  "console": []
+}

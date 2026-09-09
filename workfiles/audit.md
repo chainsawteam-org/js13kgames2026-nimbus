@@ -39,3 +39,9 @@
 - Desktop and touch share visible BUILD/move/rotate controls. A fixed wide perspective and manual zoom remain.
 - 22 focused gameplay regressions, typecheck and production build passed. Final candidate is 13098 bytes, 214 bytes below the hard limit (above the optional 12800-byte target). Archive integrity and packed-preview correspondence verified in archive.json.
 - All previous final play sessions are superseded. Fresh archive play and current-browser verification are in progress; no competition submission has occurred.
+
+- Final Chrome153.0.8010.36 and Firefox155.0.1 rendering/input checks passed; full console/offline/touch-emulation coverage also passed in Playwright Firefox155.0. Desktop/mobile development and built views match, including full-resolution canvas. No physical-device test is claimed.
+- Repeated packaging reproduced SHA-256 2a2d4fa03dcb8f210be6f6974631a793fa6c34a0b6c028f576d25ce5c2a24c5e. GitHub commit93d79fd contains identical ZIP, game source/templates/styles, and packer; checked through GitHub contents API after a raw-host503.
+- Live in-app runs reached43m,27m,72m, with deliberately missed gaps, fog loss, Space restart, best-score persistence, pause/resume, mute toggles and manual zoom. A background tab creation did not reproduce a focus change, so real in-app focus-loss behavior is not claimed from that action; input-release regression tests cover the handler.
+
+- Final unchanged-artifact in-app session lasted 17.8 minutes across repeated runs, including practice dwell and live observation. Explicit pause was 11.6s; a conservative two-minute menu allowance is recorded separately. No frame-instrumented active-time claim. Final console has no warnings/errors. Preview left at a fresh untimed opening. Detailed events: release/in-app-play.json.
