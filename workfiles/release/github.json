@@ -6,5 +6,18 @@
     "js13k/src/game.js": "d3a6a546015ffd6481d2a10813f8c40ab47d38a5abdf2d48481e7c1a12cb745f",
     "js13k/src/page.html": "64ad009cf8b3119a47992ddf30b675d156e15ce70d973fadf2482240cd4a8e71"
   },
-  "status": "Historical edge-connection verification; superseded by stacking restoration"
+  "status": "Historical edge-connection verification; superseded by stacking restoration",
+  "checkpointRelease": {
+    "commit": "6a391c899428b4de2b63a0fa1125bba28859820a",
+    "branch": "competition-2026",
+    "remoteFilesMatchLocal": {
+      "public/nimbo.zip": "12b36857d4658d15b1d768840737b5c411a1679ace42274d556ecb53550f4db3",
+      "js13k/src/game.js": "ba619a05bae0ae8a4add8f6a12cdb463c9448eaa707b09e44e0ffe9745bfa63c",
+      "js13k/src/page.html": "0860d917789457d2b28b5b2d4a2368a9db58311b564815c4e9b0f20d947d75f6",
+      "js13k/src/page.css": "3a0858c11b7e1a1a7533457c791d82eb9730c8a6a0d281bd676c5311bc373d25",
+      "scripts/pack-js13k.mjs": "474c30a179f4f46cbfcd5daa6e92ebcbef5039beec944c4bf098b8ff53bb00fb",
+      "package-lock.json": "24c7841eb0da2bfb590f82cb3709bafce5b93ebaff724fe0a5318fae15e5dec7"
+    },
+    "status": "Published source and final tested ZIP verified through GitHub API; competition submission deferred."
+  }
 }
