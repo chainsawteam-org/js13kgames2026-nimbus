@@ -9,18 +9,28 @@ Eligibility and rights: no new declaration made in this media pass
 
 ## Description
 
-A small climb. A little magic.
+Tiny unicorn. Big climb. One badly placed cloud can end it all.
 
-Build a staircase of rainbow clouds for Nimbo, a tiny unicorn with a big dream.
-She climbs by herself, but she needs you to connect the path before the fog
-catches up. Match five consecutive clouds of one color to make room. Complete
-all 14 cells of a row to form a permanent rainbow platform, then land on it to
-save a checkpoint. Watch the red drop warning: falling pieces can crush Nimbo.
-Retry from your highest saved platform, and use prism pieces to push the fog
-back. Every ten metres brings you closer to the stars.
+Build a staircase of rainbow clouds for Nimbo, who climbs by herself while the fog rises below. You control the falling pieces. She trusts you to leave a way up.
 
-All models, rainbow trails, sparkles and music are generated inside the 13KB
-package. There are no downloads, accounts or external game resources.
+**Build clever. Climb higher.**
+- Match 5+ consecutive clouds of one color horizontally or vertically to clear space and ease the fog.
+- Fill all 14 cells of a row to create a permanent glowing rainbow platform. Land on it to save a checkpoint!
+- Watch the red drop outline: falling pieces can crush Nimbo. Retry your highest checkpoint or begin a fresh climb.
+- One prism in every seven pieces pushes the fog back. Every ten metres earns a rainbow celebration.
+
+Nimbo hops up to two cells higher and one cell across. Give her steps, not walls.
+
+**Controls**
+Move: A/D or Left/Right. Rotate: W/X/Up; reverse: Q/Z.
+Soft drop: S/Down. Hard drop: Space. Pause: P/Escape. Sound: M.
+Mobile: touch buttons, tap to rotate, swipe to move/drop.
+
+Checkpoints survive retries but reset on reload. Best scores and sound preferences stay saved locally.
+
+A whole little world in 13KB: procedural unicorn, rainbow shaders, hoof sparkles and synthesized music. No external game resources or accounts required.
+
+Renderer adapted from xem/W (public domain). Built with AI assistance; readable source and reproducible packaging on GitHub.
 
 ## Controls
 
@@ -70,3 +80,5 @@ ZIP upload saved successfully: 13095 / 13312 bytes. Contact, Team, Game and Pres
 A local 18-second gameplay recording with synthesized audio was captured, including an explicitly staged checkpoint demonstration. Owner then requested no video; no YouTube upload, video listing or public recording is included. The capture remains only in the ignored local backup.
 
 The archive and game source are unchanged by this presentation pass. No final competition submission or organizer acceptance is claimed.
+
+Final live check: updated 1347-byte description and post-mortem link saved and visible on the hosted draft. Desktop, Mobile and Audio selected in the final form; category persistence is unconfirmed until submission. Hosted game link https://play.js13kgames.com/nimbo/ failed with net::ERR_BLOCKED_BY_CLIENT in the integrated browser; hosted gameplay is not verified. Final submit was not pressed.
