@@ -1,6 +1,6 @@
 {
   "version": "155.0",
-  "url": "http://127.0.0.1:8080/entry/index.html",
+  "url": "http://127.0.0.1:8082/",
   "viewports": [
     {
       "viewport": {
@@ -10,11 +10,17 @@
       "errors": [],
       "external": [],
       "requests": [
-        "http://127.0.0.1:8080/entry/index.html"
+        "http://127.0.0.1:8082/"
       ],
-      "height": "5",
+      "height": "0",
       "overflow": false,
-      "offlineInput": true
+      "offlineInput": true,
+      "sourceFixtures": {
+        "checkpointRetry": true,
+        "clearChain": true,
+        "reducedMotion": false,
+        "errors": []
+      }
     },
     {
       "viewport": {
@@ -24,11 +30,17 @@
       "errors": [],
       "external": [],
       "requests": [
-        "http://127.0.0.1:8080/entry/index.html"
+        "http://127.0.0.1:8082/"
       ],
-      "height": "4",
+      "height": "0",
       "overflow": false,
-      "offlineInput": true
+      "offlineInput": true,
+      "sourceFixtures": {
+        "checkpointRetry": true,
+        "clearChain": true,
+        "reducedMotion": false,
+        "errors": []
+      }
     },
     {
       "viewport": {
@@ -38,11 +50,17 @@
       "errors": [],
       "external": [],
       "requests": [
-        "http://127.0.0.1:8080/entry/index.html"
+        "http://127.0.0.1:8082/"
       ],
-      "height": "3",
+      "height": "0",
       "overflow": false,
-      "offlineInput": true
+      "offlineInput": true,
+      "sourceFixtures": {
+        "checkpointRetry": true,
+        "clearChain": true,
+        "reducedMotion": true,
+        "errors": []
+      }
     }
   ],
   "ok": true

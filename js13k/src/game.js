@@ -1,7 +1,7 @@
 (() => {
   // Nimbo — js13k 2026. W-style WebGL2 (xem/W, public domain): cubes, spheres,
   // pyramids, groups, camera, dFdx lighting. Same trick as Clawnicorn.
-  const COLS = 10;
+  const COLS = 14;
   const STRIDE = 16;
   const M = Math;
   const IDS = [0, 1, 2, 3, 4, 5, 6];
@@ -45,7 +45,7 @@
   const models = {};
   const nodes = {};
   let projection, ambient = 0.8, objectCount = 0;
-  let positionLocation, colorLocation, pvLocation, modelLocation, lightLocation, ambientLocation;
+  let positionLocation, colorLocation, pvLocation, modelLocation, lightLocation, ambientLocation, glowLocation, timeLocation;
 
   const col = (value) => {
     if (value && typeof value[0] === "number") return [value[0], value[1], value[2], 1];
@@ -117,6 +117,7 @@
     gl.uniformMatrix4fv(pvLocation, false, view.toFloat32Array());
     gl.uniform3f(lightLocation, light.x || 0, light.y || 0, light.z || 0);
     gl.uniform1f(ambientLocation, ambient);
+    gl.uniform1f(timeLocation, reduced ? 0 : frameTime);
     let last;
     for (const name in nodes) {
       const node = nodes[name];
@@ -126,6 +127,7 @@
       const model = node.type && models[node.type];
       if (!model) continue;
       gl.uniformMatrix4fv(modelLocation, false, node.m.toFloat32Array());
+      gl.uniform1f(glowLocation, node.glow || 0);
       if (model !== last) {
         last = model;
         gl.bindBuffer(gl.ARRAY_BUFFER, model.verticesBuffer);
@@ -166,12 +168,14 @@
       gl.attachShader(program, compile(gl, gl.VERTEX_SHADER,
         "#version 300 es\nprecision highp float;in vec4 p,c;uniform mat4 v,m;out vec4 q,k;void main(){gl_Position=v*(q=m*p);k=c;}"));
       gl.attachShader(program, compile(gl, gl.FRAGMENT_SHADER,
-        "#version 300 es\nprecision highp float;in vec4 q,k;uniform vec3 l;uniform float a;out vec4 o;void main(){o=vec4(k.rgb*(max(0.,dot(l,-normalize(cross(dFdx(q.xyz),dFdy(q.xyz)))))*.36+a),k.a);}"));
+        "#version 300 es\nprecision highp float;in vec4 q,k;uniform vec3 l;uniform float a,g,t;out vec4 o;void main(){vec3 n=normalize(cross(dFdx(q.xyz),dFdy(q.xyz)));vec3 c=k.rgb*(max(0.,dot(l,-n))*.36+a);if(g>0.){vec3 r=.65+.3*cos(q.x*.45+vec3(0.,2.,4.));float e=pow(1.-abs(n.z),2.);c=mix(r,vec3(1.,.82,.36),max(0.,g-1.)*.55)+.18+.18*e+.08*sin(q.x*2.-t*2.);}o=vec4(c,1.);}"));
       gl.linkProgram(program);
       if (!gl.getProgramParameter(program, gl.LINK_STATUS)) throw Error(gl.getProgramInfoLog(program));
       gl.useProgram(program);
       positionLocation = gl.getAttribLocation(program, "p");
       colorLocation = gl.getAttribLocation(program, "c");
+      glowLocation = gl.getUniformLocation(program, "g");
+      timeLocation = gl.getUniformLocation(program, "t");
       gl.enableVertexAttribArray(positionLocation);
       pvLocation = gl.getUniformLocation(program, "v");
       modelLocation = gl.getUniformLocation(program, "m");
@@ -219,7 +223,7 @@
 
   function reset(kind) {
     const st = {
-      board: {}, active: null, bag: [], queue: [], placed: 0,
+      board: {}, platforms: {}, checkpoint: null, settle: null, settleT: 0, settleFrom: 0, settleTo: 0, active: null, bag: [], queue: [], placed: 0,
       uni: { x: 1, y: 0, vx: 1, vy: 0, max: 0 },
       path: [], hopF: null, hopT: null, hopA: 0, hopD: 0.34, idle: 0,
       fog: -5.5, combo: 0, height: 0, fallT: 0, lockT: 0, lockN: 0, fallY: 0,
@@ -267,7 +271,7 @@
     fillQ(st);
     const n = st.queue.shift();
     fillQ(st);
-    const p = { id: n.id, x: [3, 0, 6, 1, 5, 0, 6][st.placed++ % 7], y: maxY(st) + 4, rot: 0, prism: n.prism };
+    const p = { id: n.id, x: [5, 0, 10, 2, 8, 0, 10][st.placed++ % 7], y: M.max(maxY(st),st.uni.vy) + 4 | 0, rot: 0, prism: n.prism };
     if (!fits(st, p.id, p.rot, p.x, p.y)) p.y += 2;
     st.active = p;
     st.fallT = st.lockT = st.lockN = 0;
@@ -281,21 +285,60 @@
     return y;
   }
 
-  // Nimbo is a rider, not a solid obstacle. If a falling piece reaches her
-  // cell, lift the piece until its footprint is safely above her before lock.
-  // Existing cloud cells remain solid through fits(), so this cannot overwrite
-  // the support she is standing on.
-  function liftAboveUnicorn(st, p) {
-    const ux = M.round(st.uni.x), uy = st.uni.y;
-    let guard = 0;
-    while (guard++ < 8 && cells(p.id, p.rot, p.x, p.y).some(([x, y]) => x === ux && y <= uy)) p.y++;
-    return fits(st, p.id, p.rot, p.x, p.y);
+  // Sweep cloud cells against the visible body, excluding horn and mane.
+  // Movement rejection, impact and the preview share this query.
+  function hitsBody(st, p, endY=p.y, from=st.uni, to=from) {
+    const base = occupy(st, st.uni.x, st.uni.y) ? .48 : .14;
+    return cells(p.id,p.rot,p.x,p.y).some(([x,y]) => {
+      let enter=0, leave=1;
+      const axes=[[x-from.vx,from.vx-to.vx,-.77,.77],
+        [y-from.vy,endY-p.y+from.vy-to.vy,base-.34,base+1.9]];
+      for(const [a,d,lo,hi] of axes) {
+        if(!d) { if(a<=lo || a>=hi) return false; }
+        else { const t0=(lo-a)/d,t1=(hi-a)/d; enter=M.max(enter,M.min(t0,t1)); leave=M.min(leave,M.max(t0,t1)); }
+      }
+      return enter<leave;
+    });
+  }
+
+  function fullRows(st, extra) {
+    const rows={};
+    for(const key in st.board) rows[ky(key)]=1;
+    if(extra) for(const key in extra) rows[ky(key)]=1;
+    return Object.keys(rows).filter(y=> !st.platforms[y] &&
+      Array.from({length:COLS},(_,x)=>st.board[k(x,+y)] || extra && extra[k(x,+y)]).every(Boolean));
+  }
+
+  function markPlatforms(st) {
+    const rows=fullRows(st);
+    for(const y of rows) st.platforms[y]=1;
+    if(rows.length && mode==='playing') {
+      celebration=3; $('message').textContent='Rainbow platform! Reach it to save'; blip('p');
+    }
+  }
+
+  const copy = value => JSON.parse(JSON.stringify(value));
+  function saveCheckpoint(st) {
+    if(mode!=='playing' || st.pop || st.settle || st.falling || st.hopT || !st.platforms[st.uni.y] || st.checkpoint && st.uni.y<=st.checkpoint.uni.y) return;
+    const {checkpoint,...state}=st;
+    st.checkpoint=copy(state);
+    celebration=3; $('message').textContent='Checkpoint saved · '+st.uni.y+' m'; blip('p');
+  }
+
+  function retryCheckpoint() {
+    if(!S.checkpoint) return;
+    const saved=S.checkpoint;
+    play(); Object.assign(S,copy(saved)); S.checkpoint=saved;
+    if(S.active) S.active.y=M.max(maxY(S),S.uni.vy)+4 | 0;
+    S.fallT=S.lockT=S.lockN=0;
+    camY=S.uni.vy+5; hud();
   }
 
   function move(dx) {
     if (mode !== "playing" || !S.active) return;
     const p = S.active;
     if (!fits(S, p.id, p.rot, p.x + dx, p.y)) return;
+    if (hitsBody(S,{...p,x:p.x+dx})) return;
     p.x += dx;
     onShift();
     blip("m");
@@ -306,7 +349,7 @@
     const p = S.active;
     const to = (p.rot + dir + 4) % 4;
     for (const [kx, ky] of KICKS) {
-      if (fits(S, p.id, to, p.x + kx, p.y + ky)) {
+      if (fits(S, p.id, to, p.x + kx, p.y + ky) && !hitsBody(S,{...p,rot:to,x:p.x+kx,y:p.y+ky})) {
         p.x += kx; p.y += ky; p.rot = to;
         onShift();
         blip("r");
@@ -317,8 +360,9 @@
 
   function hard() {
     if (mode !== "playing" || !S.active) return;
-    while (fits(S, S.active.id, S.active.rot, S.active.x, S.active.y - 1)) S.active.y--;
-    liftAboveUnicorn(S, S.active);
+    const y=ghostY(S);
+    if(hitsBody(S,S.active,y)) { die('crush'); return; }
+    S.active.y=y;
     blip("h");
     trauma = M.min(1, trauma + 0.28);
     lock();
@@ -336,6 +380,7 @@
   function lock() {
     const p = S.active;
     if (!p) return;
+    if(hitsBody(S,p)) { die('crush'); return; }
     const before = reachable(S).best.y;
     const cs = cells(p.id, p.rot, p.x, p.y);
     cs.forEach(([x, y], i) => { S.board[k(x, y)] = p.prism ? RB[i % 7] : PAL[p.id]; });
@@ -345,6 +390,7 @@
     S.active = null;
     S.lockBefore = before;
     S.popChain = 0;
+    markPlatforms(S);
     const ks = findKills(S);
     if (ks.length) {
       startPop(ks);
@@ -355,7 +401,7 @@
 
   function startPop(ks) {
     S.pop = ks;
-    S.popT = 0.52;
+    S.popT = 0.5;
     S.popChain++;
     ks.forEach((key) => boom(kx(key), ky(key), 7));
     blip("k");
@@ -367,6 +413,7 @@
     if (after > before || S.popChain) { S.combo++; blip("c"); } else S.combo = 0;
     S.popChain = 0;
     spawn(S);
+    saveCheckpoint(S);
     hud();
   }
 
@@ -375,7 +422,9 @@
   }
 
   function findKills(st, extra) {
-    const col = (x, y) => (extra && extra[k(x, y)]) || st.board[k(x, y)];
+    const protectedRows={...st.platforms};
+    fullRows(st,extra).forEach(y=>protectedRows[y]=1);
+    const col = (x, y) => !protectedRows[y] && ((extra && extra[k(x, y)]) || st.board[k(x, y)]);
     const kill = {};
     let max = 0;
     for (const key in st.board) { const y = ky(key); if (y > max) max = y; }
@@ -386,9 +435,6 @@
         if (same(col(x - 1, y), col(x, y))) run++; else run = 1;
         if (run >= 5) for (let i = 0; i < run; i++) kill[k(x - i, y)] = 1;
       }
-      let filled = 0;
-      for (let x = 0; x < COLS; x++) if (col(x, y)) filled++;
-      if (filled === COLS) for (let x = 0; x < COLS; x++) kill[k(x, y)] = 1;
     }
     for (let x = 0; x < COLS; x++) {
       let run = 1;
@@ -402,19 +448,22 @@
 
   function grav(st) {
     const max = maxY(st), floor = M.max(0, st.fog - 2 | 0);
+    const offsets={};
     for (let x = 0; x < COLS; x++) {
       for (let y = floor; y <= max; y++) {
         const key = k(x, y);
         const c = st.board[key];
-        if (!c) continue;
+        if (!c || st.platforms[y]) continue;
         let ny = y;
         while (ny > floor && !st.board[k(x, ny - 1)]) ny--;
         if (ny === y) continue;
         delete st.board[key];
         st.board[k(x, ny)] = c;
+        offsets[k(x,ny)]=y-ny;
       }
     }
     beginFall(st);
+    return offsets;
   }
 
   // Clouds can disappear during a hop. Fall where Nimbo actually is,
@@ -455,8 +504,21 @@
     S.pop = null;
     S.fog -= 1.4;
     blip("v");
-    grav(S);
-    repath(S);
+    S.settle=grav(S); S.settleT=.35;
+    S.settleFrom=S.settleTo=S.uni.vy;
+    // Harmless clouds can carry Nimbo upward, smoothly, instead of embedding her.
+    for(let y=M.floor(S.uni.vy)+1;y<=maxY(S);y++) {
+      if(y<S.settleTo+2 && occupy(S,S.uni.x,y)) S.settleTo=y;
+    }
+    return 1;
+  }
+
+  function tickSettle(dt) {
+    S.settleT-=dt;
+    S.uni.vy=S.settleFrom+(S.settleTo-S.settleFrom)*(reduced ? 1 : 1-M.pow(M.max(0,S.settleT/.35),2));
+    if(S.settleT>0) return;
+    S.settle=null;
+    markPlatforms(S);
     const more = findKills(S);
     if (more.length) { startPop(more); return 1; }
     afterLock(S.lockBefore);
@@ -472,7 +534,7 @@
     let bestC = q[0], qi = 0;
     while (qi < q.length) {
       const [x, y] = q[qi++];
-      if (y > bestC[1] || (y === bestC[1] && M.abs(x - 4.5) < M.abs(bestC[0] - 4.5))) bestC = [x, y];
+      if (y > bestC[1] || (y === bestC[1] && M.abs(x - (COLS-1)/2) < M.abs(bestC[0] - (COLS-1)/2))) bestC = [x, y];
       for (let dx = -1; dx <= 1; dx++) for (let dy = -1; dy <= 2; dy++) {
         if (!dx && !dy) continue;
         const nx = x + dx, ny = y + dy;
@@ -505,20 +567,27 @@
   function tick(dt) {
     if (mode === "paused") return;
     if (mode === "over") {
-      S.fallY += dt;
-      S.uni.vy -= dt * 7;
-      S.uni.vx += M.sin(S.fallY * 6) * dt * 1.4;
+      if(S.fallY<.6) {
+        S.fallY += dt;
+        S.uni.vy -= dt * 7;
+        S.uni.vx += M.sin(S.fallY * 6) * dt * 1.4;
+      }
       return;
     }
     if (mode === "playing") {
-      if (S.pop) tickPop(dt);
-      else tickPiece(dt);
+      if(S.pop) { tickPop(dt); return; }
+      if(S.settle) { tickSettle(dt); return; }
+      tickPiece(dt);
+      if(mode!=='playing' || S.pop || S.settle) return;
       S.fog += (0.15 + S.height * 0.0045) * dt;
       if (S.fog > S.uni.vy - 0.15) { die(); return; }
     }
+    const from={...S.uni};
     tickUni(dt);
+    if(mode==='playing' && S.active && hitsBody(S,S.active,S.active.y,from,S.uni)) { die('crush'); return; }
+    saveCheckpoint(S);
     const cut = S.fog - 2 | 0;
-    if (cut >= 0) for (const key in S.board) if (ky(key) < cut) delete S.board[key];
+    if (cut >= 0) for (const key in S.board) if (ky(key) < cut && !S.platforms[ky(key)]) delete S.board[key];
   }
 
   function tickPiece(dt) {
@@ -528,17 +597,20 @@
     S.fallT += dt;
     while (S.fallT >= iv) {
       S.fallT -= iv;
-      if (fits(S, p.id, p.rot, p.x, p.y - 1)) { p.y--; S.lockT = 0; }
+      if (fits(S, p.id, p.rot, p.x, p.y - 1)) {
+        if(hitsBody(S,p,p.y-1)) { die('crush'); return; }
+        p.y--; S.lockT = 0;
+      }
       else break;
     }
     if (!fits(S, p.id, p.rot, p.x, p.y - 1)) {
       S.lockT += dt;
-      if (S.lockT >= 0.5 || S.lockN >= 15) { liftAboveUnicorn(S, p); lock(); }
+      if (S.lockT >= 0.5 || S.lockN >= 15) lock();
     } else S.lockT = 0;
   }
 
   function tickUni(dt) {
-    if (S.pop) return;
+    if (S.pop || S.settle) return;
     if (S.falling) {
       const u = S.uni;
       let floor = 0;
@@ -581,6 +653,7 @@
     }
     if (S.path.length) {
       const n = S.path.shift();
+      if(S.active && hitsBody(S,S.active,S.active.y,{vx:n.x,vy:n.y})) { S.path.unshift(n); return; }
       if (!walk(S, n.x, n.y) || M.abs(n.x - S.uni.x) > 1 || n.y - S.uni.y > 2 || S.uni.y - n.y > 1) { repath(S); return; }
       S.hopF = { x: S.uni.x, y: S.uni.y };
       S.hopT = n;
@@ -598,7 +671,7 @@
     }
   }
 
-  function die() {
+  function die(reason='fog') {
     mode = "over";
     releaseInputs();
     S.active = null;
@@ -606,6 +679,8 @@
     best = M.max(best, S.height);
     try { localStorage.setItem("nimbo-best-v1", "" + best); } catch (e) { /* ignore */ }
     $("oh").textContent = S.height;
+    $('cause').textContent=reason==='crush' ? 'A falling piece crushed Nimbo. Watch the red drop warning.' : 'The fog caught up. Build higher ground.';
+    show('retry',!!S.checkpoint);
     $("ob").textContent = S.height >= best && S.height > 0 ? "A new personal best!" : "Best climb: " + best + " m";
     show("over", 1); show("hud", 0); show("pad", 0); show("pauseBtn", 0);
   }
@@ -672,7 +747,7 @@
       else if (mode === "paused") resume();
       return;
     }
-    if ((mode === "title" || mode === "over") && (c === "Space" || c === "Enter")) return play();
+    if ((mode === "title" || mode === "over") && (c === "Space" || c === "Enter")) return mode==='over' && S.checkpoint ? retryCheckpoint() : play();
     if (mode !== "playing") return;
     if (c === "ArrowLeft" || c === "KeyA") { hold.l = 1; das = 0.15; dasDir = -1; move(-1); }
     else if (c === "ArrowRight" || c === "KeyD") { hold.r = 1; das = 0.15; dasDir = 1; move(1); }
@@ -833,7 +908,7 @@
   function buildScene() {
     W.ambient(0.68);
     W.light({ x: -0.45, y: -0.82, z: -0.38 });
-    W.cloud({ n: "base", y: -1.1, w: 11.8, h: 1.35, d: 3.3, b: CREAM });
+    W.cloud({ n: "base", y: -1.1, w: COLS+1.8, h: 1.35, d: 3.3, b: CREAM });
     W.cloud({ n: "fog", y: -8, w: 40, h: 10, d: 10, b: [0.68, 0.58, 0.8] });
     for (let i = 0; i < 16; i++) W.cloud({ n: "cl" + i, w: 2.5 + i % 3, h: 0.6 + i % 2 * 0.3, d: 1.3, b: [0.91,0.86,0.97] });
     // Each rainbow band shares the same compact mesh.
@@ -886,18 +961,20 @@
     let lo = M.min(landMin, u.vy) - 2.6;
     if (landMin <= 6) lo = M.min(lo, -1.7);
     const hi = M.max(pieceMax + 2.3, u.vy + 3);
-    const spanAll = M.max(8, hi - lo);
+    const spanAll = M.max(24, hi - lo);
     const want = (lo + hi) / 2;
-    camY += (want - camY) * (1 - M.exp(-3.2 * dt));
+    if(mode!=='over') camY += (want - camY) * (1 - M.exp(-3.2 * dt));
     trauma = M.max(0, trauma - dt * 1.6);
     squash += (1 - squash) * (1-M.exp(-12*dt));
     const sh = reduced ? 0 : trauma * trauma;
     const ox = (M.random() - 0.5) * sh * 0.35;
     const oy = (M.random() - 0.5) * sh * 0.25;
     const portrait = innerWidth / innerHeight < .8;
-    const dist = M.max(16, spanAll * 1.5, 6.5 / M.tan(20*M.PI/180) / (innerWidth/innerHeight));
+    const dist = M.max(spanAll*.65, (COLS/2+1.5)/(innerWidth/innerHeight)) / M.tan(20*M.PI/180);
     const titleOffset = mode === 'title' && innerWidth > 799 ? -3.6 : 0;
     W.camera({x:titleOffset+ox, y:camY+oy, z:dist, rx:0, ry:0, fov:40});
+    lo=camY-dist*M.tan(20*M.PI/180)-2;
+    const visibleHi=camY+dist*M.tan(20*M.PI/180)+2;
     const dusk = M.min(1, S.height / 60);
     W.clearColor([.81-dusk*.11,.74-dusk*.14,.94-dusk*.04]);
     W.move({n:'fog',y:S.fog-5});
@@ -909,32 +986,39 @@
     $('status').style.display=mode==='playing'?'block':'none';
     const clearance=M.max(0,S.uni.vy-S.fog);
     $('fogbar').style.width=M.max(0,100-clearance*12)+'%';
-    $('danger').textContent=clearance<2 ? 'Fog is close! Find higher ground' : 'Room to breathe · '+clearance.toFixed(1)+' m';
+    const danger=!!S.active && hitsBody(S,S.active,ghostY(S));
+    $('danger').textContent=danger ? 'Danger! This drop will crush Nimbo' : clearance<2 ? 'Fog is close! Find higher ground' : 'Room to breathe · '+clearance.toFixed(1)+' m';
+    $('danger').style.color=danger ? '#b52246' : '';
+    $('checkpoint').textContent=S.checkpoint ? 'Checkpoint · '+S.checkpoint.uni.y+' m' : 'Fill 14 across · reach it to save';
     $('route').textContent=S.path.length || S.hopT ? 'Follow the golden stepping stones' : 'Build within 1 across / 2 up';
     let i = 0;
-    const put = (px, py, c, s) => {
+    const put = (px, py, c, s, glow=0) => {
       if (!nodes['p'+i]) W.cloud({n:'p'+i});
-      W.move({ n: "p" + i, x: px, y: py + 0.05, z: s < .3 ? .55 : 0, w: s, h: s * 0.92, d: s, b: c });
+      W.move({ n: "p" + i, x: px, y: py + 0.05, z: s < .3 ? .55 : 0, w: s, h: s * 0.92, d: s, b: c, glow });
       i++;
     };
-    const place = (x, y, c, s) => put(wx(x), y, c, s);
+    const place = (x, y, c, s, glow=0) => put(wx(x), y, c, s, glow);
     const extra = {};
-    if (S.active && mode === "playing") {
+    if (S.active && mode === "playing" && !danger) {
       const gy0 = ghostY(S);
       cells(S.active.id, S.active.rot, S.active.x, gy0).forEach(([x, y], j) => {
         extra[k(x, y)] = S.active.prism ? RB[j % 7] : PAL[S.active.id];
       });
     }
     const pending = mode === "playing" ? findKills(S, extra) : [];
+    const futurePlatforms=fullRows(S,extra);
     const hot = {};
     pending.forEach((key) => { hot[key] = 1; });
     const GOLDG = [1, 0.95, 0.45];
     for (const key in S.board) {
       const x = kx(key), y = ky(key);
-      if (y < lo - 2 || y > hi + 2) continue;
+      const drawnY=y+(S.settle && !reduced ? (S.settle[key]||0)*M.pow(M.max(0,S.settleT/.35),2) : 0);
+      if (drawnY < lo || drawnY > visibleHi) continue;
       const popping = S.pop && S.pop.indexOf(key) >= 0;
       const c = popping ? RB[(y + x) % 7] : (hot[key] ? GOLDG : S.board[key]);
-      place(x, y, c, popping ? 1.05 : 0.9);
+      const glow=S.platforms[y] ? S.checkpoint && S.checkpoint.uni.y===y ? 2 : 1 : 0;
+      place(x, drawnY, c, popping ? 1.05 : .9,glow);
+      if(!glow && futurePlatforms.includes(''+y)) put(wx(x),drawnY+.48,GOLD,.16);
     }
     const p = S.active;
     if (p && (mode === "playing" || mode === "paused")) {
@@ -946,7 +1030,7 @@
         if (gy !== p.y) {
           const gyy = y - (p.y - gy);
           const h = 0.42;
-          const col = hot[k(x, gyy)] ? GOLDG : c;
+          const col = danger ? [1,.08,.18] : futurePlatforms.includes(''+gyy) ? GOLD : hot[k(x, gyy)] ? GOLDG : c;
           const dots = [[-h, -h], [0, -h], [h, -h], [h, 0], [h, h], [0, h], [-h, h], [-h, 0]];
           for (const [dx, dy] of dots) put(wx(x) + dx, gyy + dy, col, 0.14);
         }
@@ -993,6 +1077,7 @@
   bindPad();
   bindSwipe();
   $("go").onclick = play;
+  $('retry').onclick = retryCheckpoint;
   $("again").onclick = play;
   $("resume").onclick = resume;
   $("mute").onclick = toggleMute;

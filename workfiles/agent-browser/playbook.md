@@ -50,3 +50,25 @@ Cumulative results and final duration are appended below after completion.
 - Reloaded existing deliverable tab8 at http://127.0.0.1:8080/entry/index.html. Verified Cloud tower label, original climb/clear rules and frontal camera visually. Started, moved left/right, rotated, dropped pieces, climbed2m and paused successfully.
 - All16 stacking regressions pass; typecheck/build pass. Generated ZIP11977bytes is byte-identical to0c1e875. Dev/built desktop/mobile screenshots inspected; clean console and matching baseline. Firefox155.0 desktop/portrait/landscape touch emulation, pause/mute/offline-input checks pass. Fresh15-minute final-release acceptance has not been repeated.
 - 2026-09-09 Nimbo overlap drop fix: opened http://127.0.0.1:8080/entry/index.html, started the run, pressed left, rotate and Space, then checked the browser console. No errors were emitted. The exact overlap case is covered by `a piece can land above Nimbo without killing or overwriting her support` in `scripts/nimbo.test.mjs`.
+- 2026-09-09 protected checkpoints: Chrome for Testing 153.0.8010.36 via isolated
+  `nimbo-checkpoints` agent-browser session. Exact ZIP at http://127.0.0.1:8082/;
+  separate readable-source fixture at /scenarios. Fixture flow: complete checkpoint,
+  Space, wait for `Checkpoint · 2 m`, aim at Nimbo, Space, verify crush reason,
+  Retry checkpoint, pause and verify restored height 2. Shader glow screenshot:
+  screenshots/checkpoint-glow.png. Fixture controls never enter the ZIP.
+- Chrome portrait 390x844: start, Move right, Rotate, DROP; inspect red warning and
+  screenshot checkpoint-mobile-play.png. Resize to 844x390, inspect screenshot
+  checkpoint-landscape.png. No console errors; request log contains only local
+  document loads. Physical phone hardware remains untested.
+- Firefox 155.0: exact ZIP desktop, portrait and landscape input/offline tests;
+  source fixtures verify checkpoint retries, clear chains and landscape reduced
+  motion. All assertions pass with zero errors. An earlier fixture navigation
+  emitted Firefox's `InvalidStateError: Navigated away from page` while leaving an
+  offline document; separate per-scenario pages eliminate that teardown race.
+- Dev and production wrapper screenshots inspected at desktop/mobile dimensions;
+  canvas resolution correct, zero overflow/errors and no baseline divergence.
+  Production entry, extracted ZIP entry and main preview have identical hashes.
+
+- Final 13095-byte artifact rechecked in Chrome and Firefox. Chrome reduced-motion: `set media light reduced-motion`, reload /scenarios, complete checkpoint, Space, verify checkpoint 2m and media query true; static colored glow renders without console errors (checkpoint-chrome-reduced.png). Firefox final exact-ZIP and source-fixture checks all pass.
+
+- Final exact-ZIP in-app play completed: 958 conservative active seconds (15m58s), repeated real-time UI-controlled runs, menus/pauses and previous candidates excluded. Final console warnings/errors: none. Explicit pause and sound toggle verified. Events and method are in release/in-app-play.json checkpointRelease; screenshot checkpoint-final-in-app.png. Rare checkpoint/chain cases were exercised in separate source fixtures. Physical mobile devices and an OS-level focus switch were not verified; focus/input-release behavior is covered by regression tests.

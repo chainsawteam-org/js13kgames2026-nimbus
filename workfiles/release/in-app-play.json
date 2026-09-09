@@ -10,7 +10,7 @@
     {
       "at": 1788923121315,
       "event": "Second practice build",
-      "text": "Pause\nSound on\nRAINBOW JOURNEY\n5 m\nBEST 0 m\n\u00d72\nCOMING UP\nPractice 3/3 \u00b7 No time limit\nNimbo follows your rainbow automatically\nBuild 4 new rainbow tiles\nPress SPACE or BUILD \u00b7 Move with \u2190 \u2192\n\u2212\n100%\n+\n\u2190\n\u2192\n\u21bb\n\u2193\nBUILD"
+      "text": "Pause\nSound on\nRAINBOW JOURNEY\n5 m\nBEST 0 m\n×2\nCOMING UP\nPractice 3/3 · No time limit\nNimbo follows your rainbow automatically\nBuild 4 new rainbow tiles\nPress SPACE or BUILD · Move with ← →\n−\n100%\n+\n←\n→\n↻\n↓\nBUILD"
     },
     {
       "at": 1788923155310,
@@ -23,12 +23,12 @@
     {
       "at": 1788923214160,
       "event": "Recovered at 21m; mute toggle twice",
-      "text": "Pause\nSound on\nRAINBOW JOURNEY\n23 m\nBEST 0 m\nCOMING UP\nFog behind \u00b7 10.8 m\nFill the bright outline to help Nimbo\n20 m \u00b7 Follow your rainbow\n\u2190 Move left to fill the gap\nSPACE / BUILD to place \u00b7 Matching 5 is a bonus\n\u2212\n114%\n+\n\u2190\n\u2192\n\u21bb\n\u2193\nBUILD"
+      "text": "Pause\nSound on\nRAINBOW JOURNEY\n23 m\nBEST 0 m\nCOMING UP\nFog behind · 10.8 m\nFill the bright outline to help Nimbo\n20 m · Follow your rainbow\n← Move left to fill the gap\nSPACE / BUILD to place · Matching 5 is a bonus\n−\n114%\n+\n←\n→\n↻\n↓\nBUILD"
     },
     {
       "at": 1788923242718,
       "event": "Followed visible forecast for 12 input steps",
-      "text": "Pause\nSound on\nRAINBOW JOURNEY\n23 m\nBEST 0 m\nCOMING UP\nFog behind \u00b7 4.0 m\nNimbo follows your rainbow automatically\n20 m \u00b7 Follow your rainbow\n\u2190 Move left to fill the gap\nSPACE / BUILD to place \u00b7 Matching 5 is a bonus\n\u2212\n114%\n+\n\u2190\n\u2192\n\u21bb\n\u2193\nBUILD"
+      "text": "Pause\nSound on\nRAINBOW JOURNEY\n23 m\nBEST 0 m\nCOMING UP\nFog behind · 4.0 m\nNimbo follows your rainbow automatically\n20 m · Follow your rainbow\n← Move left to fill the gap\nSPACE / BUILD to place · Matching 5 is a bonus\n−\n114%\n+\n←\n→\n↻\n↓\nBUILD"
     },
     {
       "at": 1788923294685,
@@ -38,7 +38,7 @@
     {
       "at": 1788923308050,
       "event": "Deliberately placed 18 pieces away from next gap to test failure",
-      "text": "Pause\nSound on\nRAINBOW JOURNEY\n43 m\nBEST 0 m\nCOMING UP\nFog behind \u00b7 3.3 m\nFill the bright outline to help Nimbo\n40 m \u00b7 Follow your rainbow\n\u2190 Move left to fill the gap\nSPACE / BUILD to place \u00b7 Matching 5 is a bonus\n\u2212\n114%\n+\n\u2190\n\u2192\n\u21bb\n\u2193\nBUILD"
+      "text": "Pause\nSound on\nRAINBOW JOURNEY\n43 m\nBEST 0 m\nCOMING UP\nFog behind · 3.3 m\nFill the bright outline to help Nimbo\n40 m · Follow your rainbow\n← Move left to fill the gap\nSPACE / BUILD to place · Matching 5 is a bonus\n−\n114%\n+\n←\n→\n↻\n↓\nBUILD"
     },
     {
       "at": 1788923330993,
@@ -47,7 +47,7 @@
     {
       "at": 1788923385249,
       "event": "Second run follow forecast after live wait",
-      "text": "Pause\nSound on\nRAINBOW JOURNEY\n21 m\nBEST 43 m\nCOMING UP\nFog behind \u00b7 5.8 m\nFill the bright outline to help Nimbo\n20 m \u00b7 Follow your rainbow\n\u2190 Move left to fill the gap\nSPACE / BUILD to place \u00b7 Matching 5 is a bonus\n\u2212\n114%\n+\n\u2190\n\u2192\n\u21bb\n\u2193\nBUILD"
+      "text": "Pause\nSound on\nRAINBOW JOURNEY\n21 m\nBEST 43 m\nCOMING UP\nFog behind · 5.8 m\nFill the bright outline to help Nimbo\n20 m · Follow your rainbow\n← Move left to fill the gap\nSPACE / BUILD to place · Matching 5 is a bonus\n−\n114%\n+\n←\n→\n↻\n↓\nBUILD"
     },
     {
       "at": 1788923397650,
@@ -56,7 +56,7 @@
     {
       "at": 1788923463182,
       "event": "Second run continued with visible guidance",
-      "text": "Sound on\n20 m \u00b7 Follow your rainbow\n\u2212\n114%\n+\nUNTIL THE NEXT RAINBOW\nEvery rainbow goes somewhere.\n\nThe path ended. Fill the gaps and stay ahead of the fog.\n\n27 metres\n\nBest climb: 43 m\n\nWeave again \u2192"
+      "text": "Sound on\n20 m · Follow your rainbow\n−\n114%\n+\nUNTIL THE NEXT RAINBOW\nEvery rainbow goes somewhere.\n\nThe path ended. Fill the gaps and stay ahead of the fog.\n\n27 metres\n\nBest climb: 43 m\n\nWeave again →"
     },
     {
       "at": 1788923494986,
@@ -69,7 +69,7 @@
     {
       "at": 1788923617948,
       "event": "Third run live observation",
-      "text": "Pause\nSound on\nRAINBOW JOURNEY\n61 m\nBEST 43 m\nCOMING UP\nFog is close! Build the next gap\nFill the bright outline to help Nimbo\n60 m \u00b7 Follow your rainbow\nBuild 1 new rainbow tiles\nSPACE / BUILD to place \u00b7 Matching 5 is a bonus\n\u2212\n100%\n+\n\u2190\n\u2192\n\u21bb\n\u2193\nBUILD"
+      "text": "Pause\nSound on\nRAINBOW JOURNEY\n61 m\nBEST 43 m\nCOMING UP\nFog is close! Build the next gap\nFill the bright outline to help Nimbo\n60 m · Follow your rainbow\nBuild 1 new rainbow tiles\nSPACE / BUILD to place · Matching 5 is a bonus\n−\n100%\n+\n←\n→\n↻\n↓\nBUILD"
     },
     {
       "at": 1788923631966,
@@ -78,7 +78,7 @@
     {
       "at": 1788923696869,
       "event": "Late-run observation and gap repair",
-      "text": "Pause\nSound on\nRAINBOW JOURNEY\n0 m\nBEST 72 m\nCOMING UP\n\u2212\n100%\n+\n\u2190\n\u2192\n\u21bb\n\u2193\nBUILD"
+      "text": "Pause\nSound on\nRAINBOW JOURNEY\n0 m\nBEST 72 m\nCOMING UP\n−\n100%\n+\n←\n→\n↻\n↓\nBUILD"
     },
     {
       "at": 1788923715522,
@@ -91,12 +91,12 @@
     {
       "at": 1788923849453,
       "event": "Fourth run fixed-camera desktop check",
-      "text": "Pause\nSound on\nRAINBOW JOURNEY\n18 m\nBEST 72 m\nCOMING UP\nFog behind \u00b7 4.4 m\nNimbo follows your rainbow automatically\n10 m \u00b7 Follow your rainbow\n\u2190 Move left to fill the gap\nSPACE / BUILD to place \u00b7 Matching 5 is a bonus\n\u2212\n100%\n+\n\u2190\n\u2192\n\u21bb\n\u2193\nBUILD"
+      "text": "Pause\nSound on\nRAINBOW JOURNEY\n18 m\nBEST 72 m\nCOMING UP\nFog behind · 4.4 m\nNimbo follows your rainbow automatically\n10 m · Follow your rainbow\n← Move left to fill the gap\nSPACE / BUILD to place · Matching 5 is a bonus\n−\n100%\n+\n←\n→\n↻\n↓\nBUILD"
     },
     {
       "at": 1788923914514,
       "event": "Fourth run continued with only visible controls",
-      "text": "Pause\nSound on\nRAINBOW JOURNEY\n0 m\nBEST 72 m\nCOMING UP\n\u2212\n100%\n+\n\u2190\n\u2192\n\u21bb\n\u2193\nBUILD"
+      "text": "Pause\nSound on\nRAINBOW JOURNEY\n0 m\nBEST 72 m\nCOMING UP\n−\n100%\n+\n←\n→\n↻\n↓\nBUILD"
     },
     {
       "at": 1788923994794,
@@ -105,7 +105,7 @@
     {
       "at": 1788924047725,
       "event": "Fifth run live placement and timing check",
-      "text": "Pause\nSound on\nRAINBOW JOURNEY\n0 m\nBEST 72 m\nCOMING UP\n\u2212\n100%\n+\n\u2190\n\u2192\n\u21bb\n\u2193\nBUILD"
+      "text": "Pause\nSound on\nRAINBOW JOURNEY\n0 m\nBEST 72 m\nCOMING UP\n−\n100%\n+\n←\n→\n↻\n↓\nBUILD"
     },
     {
       "at": 1788924171108,
@@ -113,5 +113,476 @@
     }
   ],
   "console": [],
-  "supersededBy": "Edge-connection mechanic; previous session is not final-artifact acceptance"
+  "supersededBy": "Edge-connection mechanic; previous session is not final-artifact acceptance",
+  "checkpointRelease": {
+    "artifactSha256": "12b36857d4658d15b1d768840737b5c411a1679ace42274d556ecb53550f4db3",
+    "bytes": 13095,
+    "startedAt": "2026-09-09T13:20:04.656Z",
+    "endedAt": "2026-09-09T13:39:19.116Z",
+    "activeSeconds": 958,
+    "method": "Real-time in-app browser keyboard/DOM controls. Consecutive playing samples counted conservatively; menus, pauses and previous artifacts excluded. No simulation fast-forward.",
+    "events": [
+      {
+        "time": "2026-09-09T13:20:04.656Z",
+        "event": "Freeze final 13095-byte ZIP; earlier candidate timing excluded",
+        "previousActiveSeconds": 293
+      },
+      {
+        "time": "2026-09-09T13:21:11.317Z",
+        "event": "Timed window",
+        "activeSeconds": 56,
+        "cause": "The fog caught up.",
+        "checkpoint": "Fill 14 across · reach it to save",
+        "danger": "Room to breathe · 6.4 m",
+        "height": "7",
+        "over": false,
+        "paused": false,
+        "retry": false,
+        "title": false
+      },
+      {
+        "time": "2026-09-09T13:23:06.271Z",
+        "cause": "The fog caught up. Build higher ground.",
+        "checkpoint": "Fill 14 across · reach it to save",
+        "danger": "Fog is close! Find higher ground",
+        "height": "7",
+        "over": true,
+        "paused": false,
+        "retry": false,
+        "title": false
+      },
+      {
+        "time": "2026-09-09T13:24:02.236Z",
+        "event": "Timed window",
+        "activeSeconds": 109,
+        "cause": "The fog caught up. Build higher ground.",
+        "checkpoint": "Fill 14 across · reach it to save",
+        "danger": "Room to breathe · 6.8 m",
+        "height": "8",
+        "over": false,
+        "paused": false,
+        "retry": false,
+        "title": false
+      },
+      {
+        "time": "2026-09-09T13:24:35.762Z",
+        "cause": "A falling piece crushed Nimbo. Watch the red drop warning.",
+        "checkpoint": "Fill 14 across · reach it to save",
+        "danger": "Room to breathe · 3.9 m",
+        "height": "11",
+        "over": true,
+        "paused": false,
+        "retry": false,
+        "title": false
+      },
+      {
+        "time": "2026-09-09T13:24:57.702Z",
+        "event": "Timed window",
+        "activeSeconds": 162,
+        "cause": "A falling piece crushed Nimbo. Watch the red drop warning.",
+        "checkpoint": "Fill 14 across · reach it to save",
+        "danger": "Room to breathe · 9.1 m",
+        "height": "2",
+        "over": false,
+        "paused": false,
+        "retry": false,
+        "title": false
+      },
+      {
+        "time": "2026-09-09T13:25:44.293Z",
+        "cause": "A falling piece crushed Nimbo. Watch the red drop warning.",
+        "checkpoint": "Fill 14 across · reach it to save",
+        "danger": "Fog is close! Find higher ground",
+        "height": "6",
+        "over": true,
+        "paused": false,
+        "retry": false,
+        "title": false
+      },
+      {
+        "time": "2026-09-09T13:25:53.662Z",
+        "event": "Timed window",
+        "activeSeconds": 216,
+        "cause": "A falling piece crushed Nimbo. Watch the red drop warning.",
+        "checkpoint": "Fill 14 across · reach it to save",
+        "danger": "Room to breathe · 5.3 m",
+        "height": "1",
+        "over": false,
+        "paused": false,
+        "retry": false,
+        "title": false
+      },
+      {
+        "time": "2026-09-09T13:26:49.352Z",
+        "event": "Timed window",
+        "activeSeconds": 271,
+        "cause": "A falling piece crushed Nimbo. Watch the red drop warning.",
+        "checkpoint": "Fill 14 across · reach it to save",
+        "danger": "Room to breathe · 6.8 m",
+        "height": "7",
+        "over": false,
+        "paused": false,
+        "retry": false,
+        "title": false
+      },
+      {
+        "time": "2026-09-09T13:26:59.569Z",
+        "cause": "The fog caught up. Build higher ground.",
+        "checkpoint": "Fill 14 across · reach it to save",
+        "danger": "Fog is close! Find higher ground",
+        "height": "7",
+        "over": true,
+        "paused": false,
+        "retry": false,
+        "title": false
+      },
+      {
+        "time": "2026-09-09T13:27:45.363Z",
+        "event": "Timed window",
+        "activeSeconds": 325,
+        "cause": "The fog caught up. Build higher ground.",
+        "checkpoint": "Fill 14 across · reach it to save",
+        "danger": "Room to breathe · 5.8 m",
+        "height": "5",
+        "over": false,
+        "paused": false,
+        "retry": false,
+        "title": false
+      },
+      {
+        "time": "2026-09-09T13:27:50.586Z",
+        "cause": "The fog caught up. Build higher ground.",
+        "checkpoint": "Fill 14 across · reach it to save",
+        "danger": "Fog is close! Find higher ground",
+        "height": "5",
+        "over": true,
+        "paused": false,
+        "retry": false,
+        "title": false
+      },
+      {
+        "time": "2026-09-09T13:28:17.153Z",
+        "cause": "A falling piece crushed Nimbo. Watch the red drop warning.",
+        "checkpoint": "Fill 14 across · reach it to save",
+        "danger": "Fog is close! Find higher ground",
+        "height": "4",
+        "over": true,
+        "paused": false,
+        "retry": false,
+        "title": false
+      },
+      {
+        "time": "2026-09-09T13:28:40.683Z",
+        "event": "Timed window",
+        "activeSeconds": 376,
+        "cause": "A falling piece crushed Nimbo. Watch the red drop warning.",
+        "checkpoint": "Fill 14 across · reach it to save",
+        "danger": "Room to breathe · 4.0 m",
+        "height": "2",
+        "over": false,
+        "paused": false,
+        "retry": false,
+        "title": false
+      },
+      {
+        "time": "2026-09-09T13:28:42.875Z",
+        "cause": "A falling piece crushed Nimbo. Watch the red drop warning.",
+        "checkpoint": "Fill 14 across · reach it to save",
+        "danger": "Room to breathe · 3.1 m",
+        "height": "3",
+        "over": true,
+        "paused": false,
+        "retry": false,
+        "title": false
+      },
+      {
+        "time": "2026-09-09T13:29:32.705Z",
+        "cause": "A falling piece crushed Nimbo. Watch the red drop warning.",
+        "checkpoint": "Fill 14 across · reach it to save",
+        "danger": "Fog is close! Find higher ground",
+        "height": "4",
+        "over": true,
+        "paused": false,
+        "retry": false,
+        "title": false
+      },
+      {
+        "time": "2026-09-09T13:29:36.000Z",
+        "event": "Timed window",
+        "activeSeconds": 427,
+        "cause": "A falling piece crushed Nimbo. Watch the red drop warning.",
+        "checkpoint": "Fill 14 across · reach it to save",
+        "danger": "Room to breathe · 5.1 m",
+        "height": "0",
+        "over": false,
+        "paused": false,
+        "retry": false,
+        "title": false
+      },
+      {
+        "time": "2026-09-09T13:29:59.352Z",
+        "cause": "A falling piece crushed Nimbo. Watch the red drop warning.",
+        "checkpoint": "Fill 14 across · reach it to save",
+        "danger": "Room to breathe · 5.9 m",
+        "height": "4",
+        "over": true,
+        "paused": false,
+        "retry": false,
+        "title": false
+      },
+      {
+        "time": "2026-09-09T13:30:31.977Z",
+        "event": "Timed window",
+        "activeSeconds": 480,
+        "cause": "A falling piece crushed Nimbo. Watch the red drop warning.",
+        "checkpoint": "Fill 14 across · reach it to save",
+        "danger": "Room to breathe · 3.6 m",
+        "height": "3",
+        "over": false,
+        "paused": false,
+        "retry": false,
+        "title": false
+      },
+      {
+        "time": "2026-09-09T13:30:34.141Z",
+        "cause": "The fog caught up. Build higher ground.",
+        "checkpoint": "Fill 14 across · reach it to save",
+        "danger": "Fog is close! Find higher ground",
+        "height": "3",
+        "over": true,
+        "paused": false,
+        "retry": false,
+        "title": false
+      },
+      {
+        "time": "2026-09-09T13:30:43.532Z",
+        "cause": "A falling piece crushed Nimbo. Watch the red drop warning.",
+        "checkpoint": "Fill 14 across · reach it to save",
+        "danger": "Fog is close! Find higher ground",
+        "height": "1",
+        "over": true,
+        "paused": false,
+        "retry": false,
+        "title": false
+      },
+      {
+        "time": "2026-09-09T13:31:17.190Z",
+        "cause": "A falling piece crushed Nimbo. Watch the red drop warning.",
+        "checkpoint": "Fill 14 across · reach it to save",
+        "danger": "Fog is close! Find higher ground",
+        "height": "3",
+        "over": true,
+        "paused": false,
+        "retry": false,
+        "title": false
+      },
+      {
+        "time": "2026-09-09T13:31:27.554Z",
+        "event": "Timed window",
+        "activeSeconds": 529,
+        "cause": "A falling piece crushed Nimbo. Watch the red drop warning.",
+        "checkpoint": "Fill 14 across · reach it to save",
+        "danger": "Room to breathe · 5.1 m",
+        "height": "1",
+        "over": false,
+        "paused": false,
+        "retry": false,
+        "title": false
+      },
+      {
+        "time": "2026-09-09T13:32:23.180Z",
+        "event": "Timed window",
+        "activeSeconds": 585,
+        "cause": "A falling piece crushed Nimbo. Watch the red drop warning.",
+        "checkpoint": "Fill 14 across · reach it to save",
+        "danger": "Room to breathe · 4.1 m",
+        "height": "7",
+        "over": false,
+        "paused": false,
+        "retry": false,
+        "title": false
+      },
+      {
+        "time": "2026-09-09T13:33:02.762Z",
+        "cause": "A falling piece crushed Nimbo. Watch the red drop warning.",
+        "checkpoint": "Fill 14 across · reach it to save",
+        "danger": "Fog is close! Find higher ground",
+        "height": "10",
+        "over": true,
+        "paused": false,
+        "retry": false,
+        "title": false
+      },
+      {
+        "time": "2026-09-09T13:33:19.222Z",
+        "event": "Timed window",
+        "activeSeconds": 638,
+        "cause": "A falling piece crushed Nimbo. Watch the red drop warning.",
+        "checkpoint": "Fill 14 across · reach it to save",
+        "danger": "Room to breathe · 4.1 m",
+        "height": "1",
+        "over": false,
+        "paused": false,
+        "retry": false,
+        "title": false
+      },
+      {
+        "time": "2026-09-09T13:33:28.462Z",
+        "cause": "A falling piece crushed Nimbo. Watch the red drop warning.",
+        "checkpoint": "Fill 14 across · reach it to save",
+        "danger": "Room to breathe · 2.9 m",
+        "height": "3",
+        "over": true,
+        "paused": false,
+        "retry": false,
+        "title": false
+      },
+      {
+        "time": "2026-09-09T13:34:04.132Z",
+        "cause": "A falling piece crushed Nimbo. Watch the red drop warning.",
+        "checkpoint": "Fill 14 across · reach it to save",
+        "danger": "Room to breathe · 4.3 m",
+        "height": "4",
+        "over": true,
+        "paused": false,
+        "retry": false,
+        "title": false
+      },
+      {
+        "time": "2026-09-09T13:34:14.515Z",
+        "event": "Timed window",
+        "activeSeconds": 689,
+        "cause": "A falling piece crushed Nimbo. Watch the red drop warning.",
+        "checkpoint": "Fill 14 across · reach it to save",
+        "danger": "Room to breathe · 7.1 m",
+        "height": "3",
+        "over": false,
+        "paused": false,
+        "retry": false,
+        "title": false
+      },
+      {
+        "time": "2026-09-09T13:35:01.121Z",
+        "cause": "The fog caught up. Build higher ground.",
+        "checkpoint": "Fill 14 across · reach it to save",
+        "danger": "Fog is close! Find higher ground",
+        "height": "5",
+        "over": true,
+        "paused": false,
+        "retry": false,
+        "title": false
+      },
+      {
+        "time": "2026-09-09T13:35:10.573Z",
+        "event": "Timed window",
+        "activeSeconds": 743,
+        "cause": "The fog caught up. Build higher ground.",
+        "checkpoint": "Fill 14 across · reach it to save",
+        "danger": "Room to breathe · 5.3 m",
+        "height": "1",
+        "over": false,
+        "paused": false,
+        "retry": false,
+        "title": false
+      },
+      {
+        "time": "2026-09-09T13:36:03.285Z",
+        "cause": "The fog caught up. Build higher ground.",
+        "checkpoint": "Fill 14 across · reach it to save",
+        "danger": "Fog is close! Find higher ground",
+        "height": "6",
+        "over": true,
+        "paused": false,
+        "retry": false,
+        "title": false
+      },
+      {
+        "time": "2026-09-09T13:36:06.591Z",
+        "event": "Timed window",
+        "activeSeconds": 796,
+        "cause": "The fog caught up. Build higher ground.",
+        "checkpoint": "Fill 14 across · reach it to save",
+        "danger": "Room to breathe · 5.1 m",
+        "height": "0",
+        "over": false,
+        "paused": false,
+        "retry": false,
+        "title": false
+      },
+      {
+        "time": "2026-09-09T13:36:53.301Z",
+        "cause": "The fog caught up. Build higher ground.",
+        "checkpoint": "Fill 14 across · reach it to save",
+        "danger": "Fog is close! Find higher ground",
+        "height": "4",
+        "over": true,
+        "paused": false,
+        "retry": false,
+        "title": false
+      },
+      {
+        "time": "2026-09-09T13:37:02.681Z",
+        "event": "Timed window",
+        "activeSeconds": 850,
+        "cause": "The fog caught up. Build higher ground.",
+        "checkpoint": "Fill 14 across · reach it to save",
+        "danger": "Room to breathe · 5.3 m",
+        "height": "1",
+        "over": false,
+        "paused": false,
+        "retry": false,
+        "title": false
+      },
+      {
+        "time": "2026-09-09T13:37:43.306Z",
+        "cause": "The fog caught up. Build higher ground.",
+        "checkpoint": "Fill 14 across · reach it to save",
+        "danger": "Fog is close! Find higher ground",
+        "height": "5",
+        "over": true,
+        "paused": false,
+        "retry": false,
+        "title": false
+      },
+      {
+        "time": "2026-09-09T13:37:58.775Z",
+        "event": "Timed window",
+        "activeSeconds": 904,
+        "cause": "The fog caught up. Build higher ground.",
+        "checkpoint": "Fill 14 across · reach it to save",
+        "danger": "Room to breathe · 8.7 m",
+        "height": "3",
+        "over": false,
+        "paused": false,
+        "retry": false,
+        "title": false
+      },
+      {
+        "time": "2026-09-09T13:38:40.378Z",
+        "cause": "The fog caught up. Build higher ground.",
+        "checkpoint": "Fill 14 across · reach it to save",
+        "danger": "Fog is close! Find higher ground",
+        "height": "7",
+        "over": true,
+        "paused": false,
+        "retry": false,
+        "title": false
+      },
+      {
+        "time": "2026-09-09T13:38:54.801Z",
+        "event": "Timed window",
+        "activeSeconds": 958,
+        "cause": "The fog caught up. Build higher ground.",
+        "checkpoint": "Fill 14 across · reach it to save",
+        "danger": "Room to breathe · 4.5 m",
+        "height": "1",
+        "over": false,
+        "paused": false,
+        "retry": false,
+        "title": false
+      }
+    ],
+    "console": [],
+    "coverage": "Repeated runs, movement, rotations, hard drops, red warnings, climbing, fog/crush losses and restarts. Final explicit pause and sound toggle. Checkpoint activation/retry and clear chains separately covered by source fixtures and regression tests. No physical mobile or OS focus-switch claim."
+  }
 }

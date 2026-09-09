@@ -33,6 +33,8 @@ button:active{transform:scale(.96)}
 .mini i{border-radius:3px;border:1px solid #35244422}
 #status{display:none;position:absolute;left:20px;bottom:24px;background:var(--paper);border-radius:16px;padding:12px 16px;min-width:210px;font-size:11px}
 #route{display:block;color:var(--muted);margin-top:6px}
+#checkpoint{display:block;color:var(--rose);margin-top:4px}
+#retry{display:none;margin-bottom:12px}
 .meter{height:4px;background:#e9e1f0;border-radius:4px;margin-top:6px;overflow:hidden}
 .meter i{display:block;width:0;height:100%;background:var(--rose);transition:width .2s}
 #message{position:absolute;top:140px;left:50%;transform:translateX(-50%);text-align:center;font:italic 20px Georgia;color:var(--ink);opacity:0;transition:opacity .3s;white-space:nowrap}

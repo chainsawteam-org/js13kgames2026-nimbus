@@ -13,8 +13,11 @@ A small climb. A little magic.
 
 Build a staircase of rainbow clouds for Nimbo, a tiny unicorn with a big dream.
 She climbs by herself, but she needs you to connect the path before the fog
-catches up. Match five clouds or fill a row to make room, and use rainbow pieces
-to buy a little breathing space. Every ten metres brings you closer to the stars.
+catches up. Match five consecutive clouds of one color to make room. Complete
+all 14 cells of a row to form a permanent rainbow platform, then land on it to
+save a checkpoint. Watch the red drop warning: falling pieces can crush Nimbo.
+Retry from your highest saved platform, and use prism pieces to push the fog
+back. Every ten metres brings you closer to the stars.
 
 All models, rainbow trails, sparkles and music are generated inside the 13KB
 package. There are no downloads, accounts or external game resources.

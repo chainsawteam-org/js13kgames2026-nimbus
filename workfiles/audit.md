@@ -64,3 +64,26 @@
 - Added a regression covering a drop above Nimbo's support. All17 gameplay tests pass, including clears, support loss, fog failure, restart, input release and audio resumption.
 - Final pack is 12032 bytes (1280 bytes spare), under the 13312-byte limit. Typecheck, production build, and dev desktop/mobile smoke checks pass with zero console/page errors and no horizontal overflow.
 - Browser spot check started the game, moved, rotated and hard-dropped a piece; console remained clean. The rule is also exercised deterministically by the new regression test.
+## Checkpoint 9 — protected rainbow checkpoints and crushing
+- Owner approved 14 columns, a wider frontal view, player-piece crushing only,
+  animated color matches and permanent full-row checkpoints. Full rows take
+  precedence over matches. Landing activates a higher checkpoint; retries restore
+  an independent snapshot. Existing best-score and mute keys remain unchanged.
+- Removed the previous lift helper and its inadequate overlap regression. Swept
+  body collision now covers hard/soft/normal drops and moving Nimbo; lateral and
+  rotated overlap is rejected. The forecast uses the same collision query.
+- Clear resolution freezes gameplay/fog, animates compacted clouds and protects
+  platforms. Harmless compacted clouds carry Nimbo out of overlap before settling.
+  Checkpoints use shader rainbow emission/rim glow and a gold active state.
+- 25 engine regressions pass. Typecheck and full build pass. The preserved studio
+  still has a large-chunk warning; the database step skips without DATABASE_URL.
+- In-app candidate play found unlimited camera descent after death. Capped the
+  death animation and retained camera position; rebuilt candidate is 13091 bytes
+  (221 bytes spare), below the mandatory limit but above the 12800-byte target.
+- This implementation exceeded the local 4000-token task budget. Final artifact
+  timed play, browser checks and publication evidence follow below.
+
+- Final forecast correction: lethal drops no longer promise color clears or new platforms. All 28 regressions pass. Final artifact: 13095 bytes, SHA-256 12b36857d4658d15b1d768840737b5c411a1679ace42274d556ecb53550f4db3. This is 217 bytes below the mandatory cap and 295 bytes above the optional target.
+- Final typecheck/build and desktop/mobile dev/built smoke checks pass. Production, preview and extracted entry share SHA-256 99b5a78dc7d699b090e877cf61cb03ac1cafa49e934b121334c71253dd42214c.
+
+- Final exact-ZIP in-app play completed: 958 conservative active seconds (15m58s), repeated real-time UI-controlled runs, menus/pauses and previous candidates excluded. Final console warnings/errors: none. Explicit pause and sound toggle verified. Events and method are in release/in-app-play.json checkpointRelease; screenshot checkpoint-final-in-app.png. Rare checkpoint/chain cases were exercised in separate source fixtures. Physical mobile devices and an OS-level focus switch were not verified; focus/input-release behavior is covered by regression tests.

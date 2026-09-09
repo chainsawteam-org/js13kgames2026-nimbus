@@ -34,10 +34,24 @@ S/down soft drops; Space hard drops. P/Escape pauses, M toggles sound.
 Touch controls provide move, rotate, soft/hard drop. Tap the board to rotate,
 swipe horizontally to nudge, or swipe down to drop.
 
-Nimbo hops up at most two cells and across one. Five matching clouds in a
-horizontal or vertical line, or a full row, clear and push fog back. Each bag
-contains all seven tetrominoes and one rainbow piece. Height is the score;
-clouds clearing may lower Nimbo, but never erase the best height achieved.
+Nimbo hops up at most two cells and across one on a 14-column board. Five matching
+clouds horizontally or vertically clear and ease the fog. Full rows instead become
+fixed rainbow platforms, immune to matches and gravity. Land on one to save an
+in-memory checkpoint; after death choose Retry checkpoint or New game. Reloading
+does not retain checkpoints. A retry restores the saved board, fog and queued
+pieces, with the active piece raised to its spawn height. Height remains the score.
+
+Falling player pieces can crush Nimbo; the red drop outline warns of an impact
+at her current position. Clouds compacting after matches cannot crush her. The
+fog remains lethal. Each bag contains all seven tetrominoes and one rainbow piece.
+Checkpoint color, emission and shimmer are procedural WebGL shader effects;
+reduced-motion uses a static glow. The camera shows the complete board and at
+least 20 usable rows on desktop.
+
+For repeatable QA, `node scripts/nimbo-preview.mjs` validates and serves the ZIP
+at port 8082. `/scenarios` serves a separate readable-source fixture with visible
+buttons for completing a checkpoint, aiming a piece at Nimbo and a clear chain.
+Fixture controls are not present in the competition ZIP.
 
 ## Credits and provenance
 
