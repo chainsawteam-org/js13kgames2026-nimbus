@@ -4,7 +4,7 @@ A tiny unicorn, a rising bank of fog, and a pile of clouds that can become eithe
 
 The player moves the pieces. Nimbo chooses her own steps. That separation creates the central tension: a good placement must fit the board and leave a route that a small unicorn can actually climb.
 
-![Nimbo promotional scene](../../public/press/cover.png)
+![Nimbo promotional scene](https://raw.githubusercontent.com/chainsawteam-org/js13kgames2026-nimbus/competition-2026/public/press/cover.png)
 
 *Staged promotional scene rendered with the game's procedural models.*
 
