@@ -1,0 +1,8 @@
+{
+  "branch": "competition-2026",
+  "remoteFilesMatchLocal": {
+    "public/nimbo.zip": "9d4697332b799ac9a8c9bada95d242f4794cfbf656cb9a580887676e7642727b",
+    "js13k/src/game.js": "b598c57d9556d81e488d8cce582eb0e691c1b88d7865512eda48426f219c0346",
+    "scripts/pack-js13k.mjs": "474c30a179f4f46cbfcd5daa6e92ebcbef5039beec944c4bf098b8ff53bb00fb"
+  }
+}

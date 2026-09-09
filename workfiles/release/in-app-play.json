@@ -1,0 +1,24 @@
+[
+  {
+    "time": "2026-09-09T02:33:49Z",
+    "event": "Final ZIP 9d469733 loaded and game started"
+  },
+  {
+    "time": "2026-09-09T02:36:12.142Z",
+    "screen": "Pause\nSound on\nYOUR CLIMB\n32 m\nBEST 91 m\nCOMING UP\nRoom to breathe · 31.3 m\nBuild within 1 across / 2 up\n30 m · A little closer to the stars"
+  },
+  {
+    "time": "2026-09-09T02:36:39.942Z",
+    "event": "Rotate, steer, hard drop; sound on",
+    "screen": "Pause\nSound on\nYOUR CLIMB\n40 m\nBEST 91 m\nCOMING UP\nRoom to breathe · 33.0 m\nFollow the golden stepping stones\n40 m · A little closer to the stars"
+  },
+  {
+    "time": "2026-09-09T02:37:37.221Z",
+    "event": "Connected stair placements",
+    "screen": "Pause\nSound on\nYOUR CLIMB\n63 m\nBEST 91 m\n×2\nCOMING UP\nRoom to breathe · 43.3 m\nFollow the golden stepping stones\n60 m · A little closer to the stars"
+  },
+  {
+    "time": "2026-09-09T02:42:34.911Z",
+    "event": "Superseded by rainbow bridge redesign"
+  }
+]

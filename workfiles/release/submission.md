@@ -9,12 +9,9 @@ Eligibility and existing asset rights: awaiting owner confirmation
 
 ## Description
 
-A small climb. A little magic.
+One little unicorn. An endless rainbow.
 
-Build a staircase of rainbow clouds for Nimbo, a tiny unicorn with a big dream.
-She climbs by herself, but she needs you to connect the path before the fog
-catches up. Match five clouds or fill a row to make room, and use rainbow pieces
-to buy a little breathing space. Every ten metres brings you closer to the stars.
+Drop colorful cloud pieces into the next gap and weave a rainbow for Nimbo to explore. Every piece extends the path, while five touching colors and magical prisms push back the fog. Start with three untimed practice pieces, then keep the rainbow growing.
 
 All models, rainbow trails, sparkles and music are generated inside the 13KB
 package. There are no downloads, accounts or external game resources.
@@ -22,7 +19,7 @@ package. There are no downloads, accounts or external game resources.
 ## Controls
 
 Move: A/D or left/right. Rotate: W/X/up; reverse: Q/Z.
-Soft drop: S/down. Hard drop: Space. Pause: P/Escape. Sound: M.
+Soft drop: S/down. Build: Space. Pause: P/Escape. Sound: M.
 On touchscreens use the buttons, tap to rotate, or swipe down to drop.
 
 ## Credits

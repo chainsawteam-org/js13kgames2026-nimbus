@@ -1,13 +1,10 @@
 {
-  "bytes": 11977,
-  "limit": 13312,
-  "headroom": 1335,
-  "sha256": "9d4697332b799ac9a8c9bada95d242f4794cfbf656cb9a580887676e7642727b",
-  "rootEntries": [
+  "bytes": 13098,
+  "sha256": "2a2d4fa03dcb8f210be6f6974631a793fa6c34a0b6c028f576d25ce5c2a24c5e",
+  "root": [
     "index.html"
   ],
-  "htmlMatchesPreview": true,
-  "htmlMatchesProduction": true,
-  "zipIntegrity": true,
-  "repeatedBuildIdentical": true
+  "integrity": true,
+  "previewMatches": true,
+  "repeatPackIdentical": true
 }

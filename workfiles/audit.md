@@ -26,3 +26,16 @@
 - Original studio UI and gameplay messages translated to English. Procedural competition game has no runtime external resources.
 - GitButler manages commits and pushes. A narrow `git remote add` configured the supplied repository because GitButler has no remote-add command. Local browser binaries/profiles, environment secrets, platform cache and unrelated generated outputs are excluded.
 - The user explicitly deferred competition-site saving/submission. Registration was inspected and requires login; no draft, terms acceptance or submission was performed.
+
+## Checkpoint 4 — user-requested rainbow concept
+- The owner rejected the tower framing/visibility and chose falling cloud pieces along a scrolling rainbow bridge. This supersedes tower acceptance and the earlier final-playtest clock.
+- New requirements: fixed isometric perspective lens; wider construction window; manual zoom/overview; clear merge forecasts; infinite horizontal rainbow progress; Nimbo walks and climbs the connected path.
+- Five touching clouds now weave permanent rainbow sections. Missing sections are visible gaps. Old tower best scores remain stored; rainbow distance uses a separate key.
+- The previous tower implementation remains available in Git history (0c1e875) and the original Three.js studio remains separate.
+
+## Checkpoint 5 — usability repair after direct player feedback
+- First-drop play confirmed that requiring matches to create a safe path made the core task confusing. Every drop now creates permanent rainbow under its columns; matching five touching colors is an optional fog-relief bonus.
+- Nimbo uses a separate front lane, so cloud stacks cannot stop traversal. The first three pieces are untimed and aligned with the next gap. Subsequent pieces require a small adjustment; the forecast explicitly says which direction to move.
+- Desktop and touch share visible BUILD/move/rotate controls. A fixed wide perspective and manual zoom remain.
+- 22 focused gameplay regressions, typecheck and production build passed. Final candidate is 13098 bytes, 214 bytes below the hard limit (above the optional 12800-byte target). Archive integrity and packed-preview correspondence verified in archive.json.
+- All previous final play sessions are superseded. Fresh archive play and current-browser verification are in progress; no competition submission has occurred.

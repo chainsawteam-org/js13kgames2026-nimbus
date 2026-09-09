@@ -26,7 +26,7 @@
       "requests": [
         "http://127.0.0.1:8082/"
       ],
-      "height": "4",
+      "height": "5",
       "overflow": false,
       "offlineInput": true
     },
@@ -40,7 +40,7 @@
       "requests": [
         "http://127.0.0.1:8082/"
       ],
-      "height": "2",
+      "height": "3",
       "overflow": false,
       "offlineInput": true
     }

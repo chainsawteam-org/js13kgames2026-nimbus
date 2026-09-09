@@ -12,7 +12,7 @@ export const Route = createRootRoute({
       { name: "viewport", content: "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" },
       { title: APP_NAME },
       { name: "theme-color", content: "#FBF7F2" },
-      { name: "description", content: "Stack rainbow clouds and climb with Nimbo, a tiny unicorn with a big dream." },
+      { name: "description", content: "Build an endless rainbow bridge for Nimbo. Drop clouds, connect gaps, and weave colorful paths." },
     ],
     links: [
       { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
